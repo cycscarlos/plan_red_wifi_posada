@@ -188,6 +188,10 @@
                 <span class="diagcard__k">SSID TV</span>
                 <span class="diagcard__v mono">TV-Manantial · 2.4 GHz</span>
               </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Switch core</span>
+                <span class="diagcard__v mono">GWN7801P · VLANes L2</span>
+              </div>
               <div class="diagcard__row diagcard__row--accent">
                 <span class="diagcard__k">Causa raíz</span>
                 <span class="diagcard__v"
@@ -234,7 +238,8 @@
             <p>
               Co-canal para backhaul mesh y clientes — condición de la malla.
               <span class="mono">802.11k/v</span> activo en Clientes para
-              móviles.
+              móviles. Validación: si 36–40 está saturado por APs vecinos, el
+              co-canal mesh se mueve a 149/153 (40 MHz).
             </p>
           </div>
           <div class="principle reveal">
@@ -298,10 +303,12 @@
           </div>
           <div class="principle reveal">
             <div class="principle__icon principle__icon--num" aria-hidden="true">11</div>
-            <h3>Endurecimiento opcional</h3>
+            <h3>Segmentación L2 por VLAN</h3>
             <p>
-              Separación por <span class="mono">VLAN</span> entre huéspedes y TV
-              si se desea mayor aislamiento (fuera del alcance base).
+              <span class="mono">VLAN 10</span> — huéspedes (5 GHz) ·
+              <span class="mono">VLAN 20</span> — TV (2.4 GHz + puertos LAN de
+              los GWN7661) · <span class="mono">VLAN 1</span> — gestión. El
+              tráfico de los TV queda confinado sin contaminar a los huéspedes.
             </p>
           </div>
         </div>
@@ -318,14 +325,29 @@
           exclusiva a los TV que aún no se cablean; los clientes móviles usan
           solo 5 GHz.
         </p>
+        <p class="section__lead reveal">
+          Un switch core L2 <span class="mono">GWN7801P</span> (8× PoE+ · 120 W ·
+          2× SFP) cimenta la jerarquía física: alimenta los APs por PoE+ y
+          segmenta la red por VLAN.
+        </p>
         <div class="nodes">
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Core · L2</div>
+            <h3>GWN7801P</h3>
+            <p class="nodecard__sub">Switch Administrable · 8× PoE+ 120 W · 2× SFP</p>
+            <ul class="nodecard__list">
+              <li>Gigabit al router del ISP</li>
+              <li>VLANes 10 / 20 / 1 + Storm Control</li>
+              <li>Alimentación PoE+ a los APs</li>
+            </ul>
+          </div>
           <div class="nodecard reveal">
             <div class="nodecard__tag nodecard__tag--master">Máster</div>
             <h3>GWN7660LR</h3>
             <p class="nodecard__sub">Exterior Long Range · 2×2:2</p>
             <ul class="nodecard__list">
               <li>Controlador de la malla</li>
-              <li>Backhaul cableado Gigabit al ISP</li>
+              <li>Trunk 802.1Q al switch (VLANes 10/20)</li>
             </ul>
           </div>
           <div class="nodecard reveal">
@@ -365,7 +387,7 @@
             </ul>
           </div>
           <div class="nodecard nodecard--key reveal" aria-hidden="true">
-            <span class="nodecard__key-label">5 APs · 1 máster + 2 esclavos + 2 in-wall</span>
+            <span class="nodecard__key-label">5 APs · 1 switch core + 1 máster + 2 esclavos + 2 in-wall</span>
           </div>
         </div>
       </div>
@@ -446,6 +468,11 @@
             </div>
           </div>
         </div>
+        <p class="section__lead reveal">
+          Validación del canal 36: verificar en sitio que no haya APs vecinos
+          transmitiendo fuerte en 36–40. Si estuviera saturado, el co-canal
+          mesh se desplaza a la banda alta de 5 GHz (149/153 en 40 MHz).
+        </p>
       </div>
     </section>
 
@@ -460,6 +487,33 @@
         </p>
 
         <div class="timeline" id="timeline">
+          <article class="stage reveal" data-stage="0">
+            <div class="stage__rail">
+              <span class="stage__num">00</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Switch GWN7801P y VLANes</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Core · L2</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>Crear <span class="mono">VLAN 10</span> (Clientes) y <span class="mono">VLAN 20</span> (TV) · <span class="mono">VLAN 1</span> de gestión</li>
+                  <li>Puerto al router del ISP en modo <span class="mono">Access / Uplink</span></li>
+                  <li>Puerto al máster GWN7660LR en modo <span class="mono">Trunk 802.1Q</span> (VLANes 10 y 20)</li>
+                  <li><span class="mono">Storm Control</span> habilitado en la VLAN 20</li>
+                  <li><span class="mono">Clientes-Manantial</span> → VLAN 10 · <span class="mono">TV-Manantial</span> + LAN de los GWN7661 → VLAN 20</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
           <article class="stage reveal" data-stage="1">
             <div class="stage__rail">
               <span class="stage__num">01</span>
@@ -492,6 +546,12 @@
                     SSID TV: <span class="mono">Hide SSID</span> +
                     <span class="mono">Client Isolation</span> habilitados — solo
                     la ven los TV y no se hablan entre sí
+                  </li>
+                  <li>
+                    Los dos SSID quedan vinculados a su VLAN (Paso 0):
+                    Clientes →
+                    <span class="mono">VLAN 10</span> · TV y LAN de los GWN7661
+                    → <span class="mono">VLAN 20</span>
                   </li>
                 </ul>
               </div>

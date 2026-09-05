@@ -339,6 +339,7 @@ a { color: inherit; }
 }
 .nodecard__tag--master { color: var(--blue-400); border-color: rgba(53, 197, 240, 0.35); }
 .nodecard__tag--inwall { color: var(--mint-400); border-color: rgba(77, 232, 195, 0.35); }
+.nodecard__tag--core { color: #ffd166; border-color: rgba(255, 209, 102, 0.35); }
 .nodecard__sub { font-size: 0.8rem; color: var(--slate-400); margin-bottom: 12px; }
 .nodecard__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
 .nodecard__list li { font-size: 0.85rem; padding-left: 16px; position: relative; color: var(--paper-dim); }
