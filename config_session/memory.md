@@ -23,4 +23,12 @@
 
 - Checkpoint previo: `43a87bf`. Push y verificación en producción: los ejecuta el usuario.
 
+## Despliegue (resuelto en esta sesión)
+
+- `origin` = https://github.com/cycscarlos/plan_red_wifi_posada.git
+- Remote se integró con `--force-with-lease` (la historia vieja en remoto fue reemplazada por la local).
+- GitHub Pages ahora publica vía **GitHub Actions**: `.github/workflows/pages.yml`
+  (deploy estático de `main`). El Source en Settings → Pages quedó en "GitHub Actions".
+- Cualquier push a `main` redeploya automáticamente.
+
 ---

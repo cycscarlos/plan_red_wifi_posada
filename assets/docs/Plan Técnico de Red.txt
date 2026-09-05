@@ -1,0 +1,83 @@
+PLAN TÉCNICO DE INGENIERÍA DE REDES Y GUÍA DE CONFIGURACIÓN GWN
+________________________________________Cliente: Posada Casa Manantial (Chichiriviche, Falcón, Venezuela)
+Infraestructura: 1,800 m², a 50m del mar | 31 Smart TV (Google OS / Android TV)
+Elaborado por: Carlos Colmenares A. — CYCS & Co. Ingeniería de Redes
+________________________________________1. Resumen Ejecutivo y Diagnóstico Confirmado
+________________________________________El problema principal de la red no radica en una falta de cobertura general ni en fallas del proveedor de Internet (ISP). Las pruebas de campo aislaron la causa raíz: 31 televisores Smart TV con tarjetas Wi-Fi genéricas (limitadas exclusivamente a 2.4 GHz) compitiendo por solo 3 canales sin solape (1, 6 y 11) bajo selección automática de canal.
+Para resolver esto sin saturar el medio inalámbrico, el plan se estructura en dos SSIDs segmentadas y un despliegue condicional en dos fases:
+●	SSID Clientes-Manantial: Operación prioritaria en 5 GHz para smartphones y laptops.
+●	SSID TV-Manantial: Operación en 2.4 GHz dedicada de forma exclusiva a los Smart TV que no puedan ser cableados.
+●	Fase 1 (Software): Configuración del plan manual de canales, ancho de canal a 20 MHz y eliminación de tasas legacy (802.11b) en la infraestructura actual.
+●	Fase 2 (Hardware/In-Wall): Despliegue estratégico de APs GWN7661 In-Wall en extremos de pasillos para cablear directamente los TV adyacentes por puerto RJ45, derivando el tráfico a un salto inalámbrico seguro en 5 GHz hacia los APs GWN7630LR.
+2. Matriz de Inventario y Topología Mesh
+________________________________________
+Equipo AP	Rol en la Red	Form Factor / Antenas	Conectividad de Backhaul
+ 
+GWN7660LR	AP Máster (Controlador)	Exterior Long Range (2x2:2)	Cableado Gigabit PoE+ al Switch del ISP
+GWN7630LR (Nodo 1)	AP Esclavo Exterior (Terraza)	Exterior Long Range (4x4:4)	Inalámbrico Mesh 5 GHz (1-Hop al Máster)
+GWN7630LR (Nodo 2)	AP Esclavo Exterior (Piso 2)	Exterior Long Range (4x4:4)	Inalámbrico Mesh 5 GHz (1-Hop al Máster)
+GWN7661 (Extensión 1)	In-Wall / Switch Pasillo A	Interior de Pared (2x2:2)	Inalámbrico Mesh 5 GHz (1-Hop a GWN7630LR) + 3 TV Cableados RJ45
+GWN7661 (Extensión 2)	In-Wall / Switch Pasillo B	Interior de Pared (2x2:2)	Inalámbrico Mesh 5 GHz (1-Hop a GWN7630LR) + 3 TV Cableados RJ45
+3. Plan de Asignación de Canales y Potencias (Frecuencia por Frecuencia)
+________________________________________A. Banda de 2.4 GHz (SSID: TV-Manantial)
+Ancho de Canal: 20 MHz (Estricto)
+Punto de Acceso	Canal Fijo (2.4 GHz)	Potencia de Transmisión (Tx Power)	Uso / Propósito
+ 
+GWN7660LR (Master)	Canal 1	Medium-High (~18 dBm)	Cobertura TV Zona Central
+GWN7630LR (Terraza)	Canal 6	Medium-High (~18 dBm)	Cobertura TV Zona Terraza
+GWN7630LR (Piso 2)	Canal 11	Medium-High (~18 dBm)	Cobertura TV Zona Alta
+GWN7661 (Pasillos)	Canal 1 u 11 (O APAGADO)	Low (~10 dBm) / OFF	Desactivado o al mínimo si los TV van por cable RJ45
+B. Banda de 5 GHz (SSID: Clientes-Manantial + Backhaul Mesh)
+Ancho de Canal: 40 MHz (Balance óptimo entre penetración y throughput)
+Punto de Acceso	Canal Fijo (5 GHz)	Potencia de Transmisión (Tx Power)	Uso / Propósito
+ 
+GWN7660LR (Master)	Canal 36 (UNII-1)	High (~23 dBm)	Backhaul Mesh + Clientes Móviles
+GWN7630LR (Terraza)	Canal 36 (Co-Canal Mesh)	High (~22 dBm)	Enlace Mesh + Clientes Móviles
+GWN7630LR (Piso 2)	Canal 36 (Co-Canal Mesh)	High (~22 dBm)	Enlace Mesh + Clientes Móviles
+GWN7661 (Pasillos)	Canal 36 (Auto-Mesh)	Medium (~16 dBm)	Enlace Mesh de Salto Único + Clientes Locales
+4. Guía Paso a Paso para la Configuración en Grandstream GWN
+________________________________________Paso 1: Configurar SSIDs y Segmentación
+1.	Inicie sesión en el panel del GWN7660LR (Master) o en GWN Cloud.
+2.	Navegue a Network Group > Wi-Fi Basic Settings.
+3.	Crear SSID 1:
+○	SSID Name: Clientes-Manantial
+○	SSID Band: 5 GHz Only (o 2.4G/5G con Band Steering en "Prefer 5G").
+○	WPA Key: [Asignar clave de huéspedes].
+○	Enable 802.11k/v (Fast Roaming): Activado.
+4.	Crear SSID 2:
+○	SSID Name: TV-Manantial
+○	SSID Band: 2.4 GHz Only.
+○	Hide SSID: Habilitado (Opcional, recomendado para evitar conexiones de huéspedes).
+○	Client Isolation: Habilitado (Evita comunicación entre televisores).
+○	Enable 802.11k/v/r: Desactivado (Los televisores son fijos).
+Paso 2: Ajuste Físico de Radios y Canales
+1.	Vaya a Access Points > Seleccione el AP a editar (ej. GWN7660LR) > Configuration.
+2.	En la pestaña Radio 2.4G:
+○	Channel Width: 20 MHz
+○	Channel: Seleccionar Canal 1 (para Master), 6 (para Terraza) y 11 (para Piso 2).
+○	Tx Power: Custom > 18 dBm.
+3.	En la pestaña Radio 5G:
+○	Channel Width: 40 MHz
+○	Channel: Seleccionar Canal 36 (Fijo para estabilizar el Mesh).
+○	Tx Power: Custom > 22 dBm - 23 dBm.
+Paso 3: Depuración de Tasas Legacy y Parámetros Avanzados
+1.	Vaya a Wi-Fi Settings > Advanced Settings.
+2.	Multicast to Unicast: Habilitado (Reduce el tráfico broadcast en la red inalámbrica).
+3.	Supported Data Rates (2.4 GHz):
+○	Desactivar velocidades de 1 Mbps, 2 Mbps, 5.5 Mbps y 11 Mbps (CCK / 802.11b).
+○	Establecer la tasa mínima obligatoria en 12 Mbps (OFDM). Esto evita que tráficos lejanos lentos congelen el tiempo de aire.
+4.	Minimum RSSI:
+○	Para 2.4 GHz: -80 dBm
+○	Para 5 GHz: -75 dBm
+5. Estrategia de Implementación de los APs GWN7661 In-Wall
+________________________________________
+Ubicación: Extremo de pasillos o áreas alejadas de los APs Long Range.
+Modo de Operación:
+1.	El GWN7661 se enciende mediante un inyector PoE conectado a un puerto WAN/PoE-In local.
+2.	El AP descubre al Master y establece enlace Mesh de salto único en 5 GHz con el GWN7630LR más cercano.
+3.	Se conectan mediante cable de red UTP estándar hasta 3 Smart TV adyacentes a los puertos LAN Gigabit del GWN7661.
+4.	En los TV se deshabilita la interfaz Wi-Fi y se activa la interfaz Ethernet.
+5.	Tráfico resultante: 100% de los TV conectados a ese AP pasan a cero ruido en 2.4 GHz y streaming continuo por cable.
+6. Código HTML / CSS Ajustado para el Landing Page (Site)
+________________________________________A continuación se presenta el bloque de código actualizado correspondiente a la sección de diagnóstico y fases del sitio web del proyecto (fase1_fase2_site):
+ <!-- SECCION DIAGNOSTICO Y PLAN ACTUALIZADO --> <section class="diagnostic-section" id="diagnostico"> <div class="container"> <h2 class="section-title">Diagnóstico Confirmado y Estrategia de Red</h2> <p class="section-subtitle">Solución de fondo para la saturación de 2.4 GHz en Smart TV</p> <div class="grid-2-col"> <div class="card"> <h3>Fase 1: Optimización de Software (Inmediata)</h3> <ul> <li><strong>Segmentación de SSIDs:</strong> <code>Clientes-Manantial</code> (5 GHz) y <code>TV-Manantial</code> (2.4 GHz).</li> <li><strong>Plan Manual de Canales:</strong> Asignación fija (1, 6 y 11) en 20 MHz eliminando el canal automático.</li> <li><strong>Limpieza de Tasas Legacy:</strong> Eliminación del protocolo 802.11b para liberar tiempo de aire.</li> <li><strong>Prueba de Ocupación Real:</strong> Medición objetiva del streaming en 31 Smart TVs.</li> </ul> </div> <div class="card highlight-card"> <h3>Fase 2: Expansión In-Wall GWN7661 (Estructural)</h3> <ul> <li><strong>Instalación Estratégica:</strong> APs In-Wall en extremos de pasillos sobre nodos GWN7630LR.</li> <li><strong>Conexión Cableada direct TV:</strong> Reducción de carga inalámbrica cableando TV por RJ45.</li> <li><strong>Enlace Mesh de 5 GHz:</strong> Backhaul dedicado en salto único sin interferir en 2.4 GHz.</li> <li><strong>Cero Buffering:</strong> Elimi
