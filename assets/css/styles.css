@@ -308,6 +308,84 @@ a { color: inherit; }
 .stage__list li::before { content: "—"; position: absolute; left: 0; color: var(--blue-600); }
 
 /* ==========================================================================
+   NODES / TOPOLOGÍA
+   ========================================================================== */
+.nodes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+.nodecard {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--ink-900);
+  padding: 22px 20px;
+  transition: border-color 0.25s, transform 0.2s var(--ease);
+}
+.nodecard:hover { border-color: var(--blue-600); transform: translateY(-2px); }
+.nodecard h3 { font-family: var(--font-mono); font-size: 0.98rem; letter-spacing: 0.02em; margin: 10px 0 4px; }
+.nodecard__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate-400);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.nodecard__tag--master { color: var(--blue-400); border-color: rgba(53, 197, 240, 0.35); }
+.nodecard__tag--inwall { color: var(--mint-400); border-color: rgba(77, 232, 195, 0.35); }
+.nodecard__sub { font-size: 0.8rem; color: var(--slate-400); margin-bottom: 12px; }
+.nodecard__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.nodecard__list li { font-size: 0.85rem; padding-left: 16px; position: relative; color: var(--paper-dim); }
+.nodecard__list li::before { content: "—"; position: absolute; left: 0; color: var(--blue-600); }
+.nodecard--key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  background: rgba(53, 197, 240, 0.04);
+}
+.nodecard__key-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--slate-400);
+  text-align: center;
+}
+
+/* ==========================================================================
+   BANDS / PLAN DE CANALES
+   ========================================================================== */
+.band { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--ink-900); }
+.band + .band { margin-top: 26px; }
+.band__head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-850);
+}
+.band__head h3 { margin: 0; font-family: var(--font-body); font-size: 1.05rem; }
+.band__rows { display: grid; }
+.band__row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 0.9fr 1.3fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.band__row:last-child { border-bottom: none; }
+.band__row:hover { background: rgba(53, 197, 240, 0.04); }
+.band__node { color: var(--paper); font-weight: 500; }
+.band__cell { color: var(--slate-400); }
+.band__cell.mono { color: var(--blue-400); font-size: 0.86em; }
+
+/* ==========================================================================
    DIAGRAM
    ========================================================================== */
 .diagram { margin-top: 30px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-950); padding: 20px; }
@@ -384,6 +462,7 @@ a { color: inherit; }
   .gov { grid-template-columns: 1fr; }
   .stats__inner { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(3) { border-left: none; }
+  .band__row { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 760px) {
   .nav__links { display: none; }
@@ -392,4 +471,5 @@ a { color: inherit; }
   .hero { padding: 150px 20px 70px; }
   .stage { grid-template-columns: 44px 1fr; gap: 14px; }
   .stage__num { width: 32px; height: 32px; font-size: 0.72rem; }
+  .band__row { grid-template-columns: 1fr; gap: 4px; padding: 12px 18px; }
 }

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan Técnico de Red Mesh GWN — Posada Casa Manantial</title>
+    <meta
+      name="description"
+      content="Plan técnico de redes y guía de configuración mesh GWN para Posada Casa Manantial: segmentación de SSIDs, plan de canales y despliegue de APs in-wall que eliminan el buffering de 31 Smart TV."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2304080f%22/><circle cx=%2250%22 cy=%2250%22 r=%2216%22 fill=%22none%22 stroke=%22%2335c5f0%22 stroke-width=%228%22/></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="#top" aria-label="Inicio">
+          <span class="nav__pulse" aria-hidden="true"></span>
+          <span class="nav__mark"
+            >CYCS <span class="nav__mark-accent">& Co.</span></span
+          >
+        </a>
+        <nav class="nav__links" aria-label="Navegación principal">
+          <a href="#resumen">Resumen</a>
+          <a href="#topologia">Topología</a>
+          <a href="#canales">Canales</a>
+          <a href="#guia">Guía</a>
+          <a href="#inwall">In-Wall</a>
+        </nav>
+        <button
+          class="nav__toggle"
+          id="navToggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav__mobile" id="navMobile" aria-label="Navegación móvil">
+        <a href="#resumen">Resumen</a>
+        <a href="#topologia">Topología</a>
+        <a href="#canales">Canales</a>
+        <a href="#guia">Guía</a>
+        <a href="#inwall">In-Wall</a>
+      </nav>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="eyebrow reveal">Plan técnico · Red mesh GWN</p>
+        <h1 class="hero__title reveal">
+          Treinta y un TV. <br />Tres canales.<br /><span class="hero__title-accent"
+            >Una sola solución.</span
+          >
+        </h1>
+        <p class="hero__sub reveal">
+          Los Smart TV solo usan 2.4 GHz y compiten por tres canales con
+          selección automática. <br/>La solución: dos SSIDs segmentados y un backhaul
+          mesh de 5 GHz que retira los TV del aire.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#guia" class="btn btn--primary">Ver la guía de configuración</a>
+          <a
+            href="assets/docs/Plan-Tecnico-de-Red.pdf"
+            download
+            class="btn btn--ghost"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+            </svg>
+            Descargar plan
+          </a>
+        </div>
+
+        <div class="hero__monitor reveal" aria-hidden="true">
+          <svg viewBox="0 0 1200 160" class="ekg" preserveAspectRatio="none">
+            <path
+              id="ekgPath"
+              d="M0,80 L140,80 L165,80 L180,30 L200,130 L220,80 L260,80 L620,80 L645,80 L660,30 L680,130 L700,80 L740,80 L1100,80 L1120,80 L1135,30 L1155,130 L1175,80 L1200,80"
+              fill="none"
+              stroke="url(#ekgGrad)"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="ekgGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#35c5f0" stop-opacity="0" />
+                <stop offset="15%" stop-color="#35c5f0" />
+                <stop offset="50%" stop-color="#4de8c3" />
+                <stop offset="85%" stop-color="#35c5f0" />
+                <stop offset="100%" stop-color="#35c5f0" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="hero__monitor-label">
+            <span class="dot"></span> RED MESH GWN — PLAN DE CONFIGURACIÓN
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-label="Datos del sitio">
+      <div class="stats__inner">
+        <div class="stat reveal">
+          <span class="stat__value" data-count="1800">0</span>
+          <span class="stat__unit">m²</span>
+          <span class="stat__label">Área del sitio</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="31">0</span>
+          <span class="stat__unit">TV</span>
+          <span class="stat__label">Smart TV · 2.4 GHz exclusivo</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="2">0</span>
+          <span class="stat__unit">SSIDs</span>
+          <span class="stat__label">Clientes · TV segmentadas</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="5">0</span>
+          <span class="stat__unit">APs</span>
+          <span class="stat__label">Malla mesh en 5 GHz</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESUMEN / DIAGNÓSTICO ============ -->
+    <section class="section" id="resumen">
+      <div class="section__inner">
+        <p class="eyebrow reveal">01 · Resumen</p>
+        <h2 class="reveal">
+          No es cobertura. Es un canal compartido, saturado.
+        </h2>
+        <div class="split">
+          <div class="split__col reveal">
+            <p>
+              Los 31 Smart TV usan tarjetas Wi-Fi genéricas restringidas a
+              <strong>2.4 GHz</strong>: solo tres canales sin solape (1, 6 y
+              11), bajo selección automática de canal. Todos compiten por el
+              mismo aire — el origen del buffering.
+            </p>
+            <p>
+              La solución deja de pelear contra la banda y la estructura
+              directamente: separa el tráfico por SSID y, donde hace falta,
+              saca los TV del aire por cable.
+            </p>
+          </div>
+          <div class="split__col reveal">
+            <div class="diagcard">
+              <div class="diagcard__row">
+                <span class="diagcard__k">Banda de los TV</span>
+                <span class="diagcard__v">2.4 GHz exclusivo</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Canales sin solape</span>
+                <span class="diagcard__v">3 (1 / 6 / 11)</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">SSID Clientes</span>
+                <span class="diagcard__v mono">Clientes-Manantial · 5 GHz</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">SSID TV</span>
+                <span class="diagcard__v mono">TV-Manantial · 2.4 GHz</span>
+              </div>
+              <div class="diagcard__row diagcard__row--accent">
+                <span class="diagcard__k">Causa raíz</span>
+                <span class="diagcard__v"
+                  >Saturación 2.4 GHz — no cobertura ni ISP</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOPOLOGÍA ============ -->
+    <section class="section section--panel" id="topologia">
+      <div class="section__inner">
+        <p class="eyebrow reveal">02 · Topología mesh</p>
+        <h2 class="reveal">Un máster y dos saltos, todo en 5 GHz</h2>
+        <p class="section__lead reveal">
+          El tráfico pesa sobre el backhaul inalámbrico de 5 GHz. Los TV salen
+          de la banda de 2.4 GHz quedando solo para clientes de corto alcance.
+        </p>
+        <div class="nodes">
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--master">Máster</div>
+            <h3>GWN7660LR</h3>
+            <p class="nodecard__sub">Exterior Long Range · 2×2:2</p>
+            <ul class="nodecard__list">
+              <li>Controlador de la malla</li>
+              <li>Backhaul cableado Gigabit al ISP</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag">Nodo esclavo</div>
+            <h3>GWN7630LR · Terraza</h3>
+            <p class="nodecard__sub">Exterior Long Range · 4×4:4</p>
+            <ul class="nodecard__list">
+              <li>Mesh inalámbrico 5 GHz · 1 salto</li>
+              <li>Cobertura TV zona terraza</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag">Nodo esclavo</div>
+            <h3>GWN7630LR · Piso 2</h3>
+            <p class="nodecard__sub">Exterior Long Range · 4×4:4</p>
+            <ul class="nodecard__list">
+              <li>Mesh inalámbrico 5 GHz · 1 salto</li>
+              <li>Cobertura TV zona alta</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--inwall">In-Wall</div>
+            <h3>GWN7661 · Pasillo A</h3>
+            <p class="nodecard__sub">Interior de pared · 2×2:2</p>
+            <ul class="nodecard__list">
+              <li>Mesh 5 GHz al GWN7630LR cercano</li>
+              <li>3 TV cableados por RJ45</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--inwall">In-Wall</div>
+            <h3>GWN7661 · Pasillo B</h3>
+            <p class="nodecard__sub">Interior de pared · 2×2:2</p>
+            <ul class="nodecard__list">
+              <li>Mesh 5 GHz al GWN7630LR cercano</li>
+              <li>3 TV cableados por RJ45</li>
+            </ul>
+          </div>
+          <div class="nodecard nodecard--key reveal" aria-hidden="true">
+            <span class="nodecard__key-label">5 APs · 1 máster + 2 esclavos + 2 in-wall</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CANALES ============ -->
+    <section class="section" id="canales">
+      <div class="section__inner">
+        <p class="eyebrow reveal">03 · Plan de canales</p>
+        <h2 class="reveal">Manual, fijo, y sin canales que se solapen</h2>
+        <p class="section__lead reveal">
+          Se elimina la selección automática de canal. Cada banda tiene su
+          plan, y cada AP, su canal asignado.
+        </p>
+
+        <div class="band">
+          <div class="band__head reveal">
+            <h3>2.4 GHz <span class="mono">· TV-Manantial</span></h3>
+            <span class="badge badge--low">20 MHz estricto</span>
+          </div>
+          <div class="band__rows">
+            <div class="band__row reveal">
+              <span class="band__node">GWN7660LR · Master</span>
+              <span class="band__cell mono">Canal 1</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona central</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Terraza</span>
+              <span class="band__cell mono">Canal 6</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona terraza</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Piso 2</span>
+              <span class="band__cell mono">Canal 11</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona alta</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7661 · Pasillos</span>
+              <span class="band__cell mono">1 u 11 · o OFF</span>
+              <span class="band__cell mono">~10 dBm / OFF</span>
+              <span class="band__cell">Si los TV van por cable</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="band">
+          <div class="band__head reveal">
+            <h3>5 GHz <span class="mono">· Clientes-Manantial + mesh</span></h3>
+            <span class="badge badge--high">40 MHz</span>
+          </div>
+          <div class="band__rows">
+            <div class="band__row reveal">
+              <span class="band__node">GWN7660LR · Master</span>
+              <span class="band__cell mono">Canal 36</span>
+              <span class="band__cell mono">~23 dBm</span>
+              <span class="band__cell">Backhaul mesh + clientes</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Terraza</span>
+              <span class="band__cell mono">Canal 36 · co-canal</span>
+              <span class="band__cell mono">~22 dBm</span>
+              <span class="band__cell">Enlace mesh + clientes</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Piso 2</span>
+              <span class="band__cell mono">Canal 36 · co-canal</span>
+              <span class="band__cell mono">~22 dBm</span>
+              <span class="band__cell">Enlace mesh + clientes</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7661 · Pasillos</span>
+              <span class="band__cell mono">Canal 36 · auto-mesh</span>
+              <span class="band__cell mono">~16 dBm</span>
+              <span class="band__cell">Salto único + clientes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GUÍA ============ -->
+    <section class="section section--panel" id="guia">
+      <div class="section__inner">
+        <p class="eyebrow reveal">04 · Guía de configuración</p>
+        <h2 class="reveal">Tres pasos en el panel GWN</h2>
+        <p class="section__lead reveal">
+          Accede al GWN7660LR (máster) o a GWN Cloud. Todo se resuelve en el
+          panel de configuración.
+        </p>
+
+        <div class="timeline" id="timeline">
+          <article class="stage reveal" data-stage="1">
+            <div class="stage__rail">
+              <span class="stage__num">01</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>SSIDs y segmentación</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Network Group</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>
+                    SSID 1 — <span class="mono">Clientes-Manantial</span>:
+                    5 GHz, <span class="mono">802.11k/v</span> activado
+                  </li>
+                  <li>
+                    SSID 2 — <span class="mono">TV-Manantial</span>: 2.4 GHz,
+                    <span class="mono">802.11k/v/r</span> desactivado (TV fijos)
+                  </li>
+                  <li>SSID TV: <span class="mono">Hide SSID</span> + <span class="mono">Client Isolation</span> habilitados</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="2">
+            <div class="stage__rail">
+              <span class="stage__num">02</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Radios y canales</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Access Points</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>Radio 2.4G: ancho <span class="mono">20 MHz</span>, canal fijo según plan</li>
+                  <li>Radio 5G: ancho <span class="mono">40 MHz</span>, canal 36 fijo para estabilizar el mesh</li>
+                  <li>Tx Power: 2.4G <span class="mono">18 dBm</span> · 5G <span class="mono">22–23 dBm</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="3">
+            <div class="stage__rail">
+              <span class="stage__num">03</span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Tasas legacy y avanzados</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Advanced</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li><span class="mono">Multicast to Unicast</span>: habilitado</li>
+                  <li>
+                    Desactivar 1/2/5.5/11 Mbps (<span class="mono">CCK 802.11b</span>);
+                    tasa mínima <span class="mono">12 Mbps OFDM</span>
+                  </li>
+                  <li>Minimum RSSI: <span class="mono">-80 dBm</span> (2.4G) · <span class="mono">-75 dBm</span> (5G)</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IN-WALL ============ -->
+    <section class="section" id="inwall">
+      <div class="section__inner">
+        <p class="eyebrow reveal">05 · Expansión in-wall</p>
+        <h2 class="reveal">Cuando el resultado pide cable</h2>
+        <p class="section__lead reveal">
+          Si el streaming por aire no alcanza, los GWN7661 llevan los TV directo
+          por RJ45 en 1 salto mesh sobre 5 GHz.
+        </p>
+        <div class="principles">
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◇</div>
+            <h3>En extremos de pasillo</h3>
+            <p>
+              Ubicación sobre áreas alejadas de los APs Long Range, donde el TV
+              necesita conexión firme.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◆</div>
+            <h3>PoE local, mesh en 5 GHz</h3>
+            <p>
+              Se enciende con un inyector PoE y descubre al máster con enlace
+              de salto único hacia el GWN7630LR cercano.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">▣</div>
+            <h3>Hasta 3 TV por RJ45</h3>
+            <p>
+              Se conectan a los puertos LAN Gigabit y en el TV se apaga la
+              interfaz Wi‑Fi y se activa Ethernet.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◷</div>
+            <h3>Cero ruido en 2.4 GHz</h3>
+            <p>
+              El 100% del tráfico de esos TV sale por cable: nada de broadcast
+              inalámbrico.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◈</div>
+            <h3>Streaming continuo</h3>
+            <p>Enlace gigabit físico local para interrupción cero.</p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◉</div>
+            <h3>Condicional a Fase 1</h3>
+            <p>
+              Se despliega solo si, cerrada la optimización de software, la
+              banda aún se satura en horas altas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="cta" id="plan">
+      <div class="cta__inner reveal">
+        <h2>El plan completo, listo para ejecutar.</h2>
+        <p>
+          Diagnóstico, inventario, plan de canales y guía paso a paso — todo en
+          el documento técnico.
+        </p>
+        <a
+          href="assets/docs/Plan-Tecnico-de-Red.pdf"
+          download
+          class="btn btn--primary btn--lg"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+          </svg>
+          Descargar Plan Técnico
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>CYCS & Co. — Ingeniería de redes inalámbricas</span>
+        <span
+          >Copyright © Desarrollado por <i>Ing. Carlos Colmenares A.</i> | Derechos
+          Reservados · 2026</span
+        >
+      </div>
+    </footer>
+
+    <button
+      class="scrollFab"
+      id="scrollFab"
+      type="button"
+      aria-label="Ir al final de la página"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
