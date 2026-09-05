@@ -24,15 +24,29 @@
 
 - `index.html` enlaza `assets/css/styles.css`, `assets/js/main.js` y
   `assets/docs/Plan-tecnico-red-wifi.pdf`.
-- El informe fuente ahora es `assets/docs/Plan-tecnico-red-wifi.md` (+`.docx` y `.pdf` generados
-  por el usuario desde ese texto). Se eliminaron `Plan-Tecnico-de-Red.pdf`, `Plan Técnico de Red.txt`
-  e `index_v.Original.html`.
-- El `.md` es el texto editable; el `.pdf`/`.docx` los regenera el usuario (no los edito).
+- El informe fuente ya **no es el `.md`**: el usuario eliminó `Plan-tecnico-red-wifi.md` y designó
+  **`assets/docs/Plan-tecnico-red-wifi.docx` como fuente editable** del informe; el `.pdf` se
+  regenera desde el `.docx`. Verdad vigente desde commit `2e33890` (baja del `.md`).
+- Se eliminaron `Plan-Tecnico-de-Red.pdf`, `Plan Técnico de Red.txt` e `index_v.Original.html`.
 - `assets/js/main.js` sigue intacto (IIFE ES5, no tocar).
+- `assets/docs/Opinión de IA Gemini.txt`: opinión de IA externa = base de la mejora con switch.
+
+## Sesión actual: Switch GWN7801P + Segmentación L2 (recomendación Gemini)
+
+- Incorporado al informe (docx/pdf, verificado internamente) y a la landing:
+  switch GWN7801P definitivo en Fase 1 (matriz de inventario + topología, 8× PoE+ 120W, 2× SFP);
+  **Premisa 11 pasa a DEFINITIVA** (VLAN 10 = Clientes/5 GHz · VLAN 20 = TV/2.4 GHz + LAN GWN7661 ·
+  VLAN 1 = gestión; mDNS TV confinado en VLAN 20, con **nota de casting**);
+  **Paso 0** en la guía (VLANes, Access/Uplink al router, Trunk 802.1Q al máster, Storm Control en
+  VLAN 20, vínculo de SSIDs); **contingencia de canal**: si 36–40 saturado por APs vecinos, el
+  co-canal mesh se mueve a 149/153 (40 MHz) — nota en premisa 03 y plan de canales.
+- Landing: tarjeta ámbar `GWN7801P · Core·L2` en topología (`.nodecard__tag--core`), diagcard con
+  "Switch core", guía con Paso 00, premisas 03/11 actualizadas, nota de validación del canal.
 
 ## Notas
 
-- Checkpoints: `43a87bf` y `e290496`. Push y verificación en producción: los ejecuta el usuario.
+- Checkpoints: `43a87bf`, `e290496`, `933ed9e`. Final: `2e33890` + `35ca8e4`.
+  Push y verificación en producción: los ejecuta el usuario.
 
 ## Despliegue (resuelto en esta sesión)
 
