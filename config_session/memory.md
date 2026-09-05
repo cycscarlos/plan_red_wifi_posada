@@ -14,7 +14,7 @@
   (2 GWN7661 iniciales + 2 solo si la medición en Fase 1 lo justifica), **potencia mínima en
   GWN7661** (2.4G radio OFF, 5G ~10–12 dBm solo como puente mesh; los TV van por LAN RJ45),
   Hide SSID + Client Isolation en TV-Manantial, sin tasas legacy (mín 12 Mbps OFDM),
-  Multicast→Unicast, validación de cobertura 5G en campo, y VLAN opcional.
+  Multicast→Unicast y validación de cobertura 5G en campo.
 - Landing (`index.html`): nueva sección **02 · Premisas de diseño** (grid `.principles` con
   `.principle__icon--num`), anteriores secciones renumeradas 03–06, nav ampliado con "Premisas",
   lead de Topología corregido, tablas de canales con GWN7661 "Radio OFF"/"~10–12 dBm",
@@ -43,10 +43,24 @@
 - Landing: tarjeta ámbar `GWN7801P · Core·L2` en topología (`.nodecard__tag--core`), diagcard con
   "Switch core", guía con Paso 00, premisas 03/11 actualizadas, nota de validación del canal.
 
+## Sesión actual: Página de costos independiente (agnóstica a costos)
+
+- La landing queda **100% agnóstica de costos**; se creó `costos.html` (raíz, misma identidad visual,
+  reúsa `assets/css/styles.css` + `assets/js/main.js`) con **CTA "Valores de referencia"** en la
+  sección final de la landing.
+- Reglas de contenido: montos **solo en USD + fecha de vigencia** (05·09·2026); equivalencia en Bs
+  **solo por contacto** (inflación en $ y Bs). Desglose = **Equipamiento** (con sub-total) +
+  **Mano de obra → "A convenir"**. Nada más.
+- Equipamiento cotizado (desde `assets/docs/Costos.xlsx` del usuario): AP GWN7661 ×2 @ $139.50
+  (= $279.00) · Switch GWN7801P ×1 @ $208.50 · Bobina UTP Cat.6e @ $100.00 → **Subtotal $587.50**.
+  Mano de obra: **A convenir**. Los AP **GWN7660LR/GWN7630LR ya existen y operan → no se cotizan**.
+- Botón "Solicitar cotización" → `https://wa.me/+5804143246396`.
+- `.gitignore` ignora el temporal de Excel (`~$*`); `Costos.xlsx` es fuente del usuario (trackeado).
+
 ## Notas
 
-- Checkpoints: `43a87bf`, `e290496`, `933ed9e`. Final: `2e33890` + `35ca8e4`.
-  Push y verificación en producción: los ejecuta el usuario.
+- Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`. Final: `2e33890`, `35ca8e4`,
+  `5c5e871`, `a60f861`. Push y verificación en producción: los ejecuta el usuario.
 
 ## Despliegue (resuelto en esta sesión)
 
