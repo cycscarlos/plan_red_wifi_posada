@@ -41,5 +41,8 @@
 - GitHub Pages ahora publica vía **GitHub Actions**: `.github/workflows/pages.yml`
   (deploy estático de `main`). El Source en Settings → Pages quedó en "GitHub Actions".
 - Cualquier push a `main` redeploya automáticamente.
+- **Gotcha de upstream:** tras la integración forzada, `main` quedó **sin upstream registrado**;
+  `git push` daba "no upstream branch". Solución: `git push --set-upstream origin main`
+  (una sola vez); desde ahí `git push` normal funciona.
 
 ---
