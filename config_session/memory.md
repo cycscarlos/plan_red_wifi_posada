@@ -54,7 +54,7 @@
 - Equipamiento cotizado (desde `assets/docs/Costos.xlsx` del usuario): AP GWN7661 ×2 @ $139.50
   (= $279.00) · Switch GWN7801P ×1 @ $208.50 · Bobina UTP Cat.6e @ $100.00 → **Subtotal $587.50**.
   Mano de obra: **A convenir**. Los AP **GWN7660LR/GWN7630LR ya existen y operan → no se cotizan**.
-- Botón "Solicitar cotización" → `https://wa.me/+5804143246396`.
+- Sin CTA de cotización directo en la página de costos: solo informa; el contacto se gestiona aparte.
 - `.gitignore` ignora el temporal de Excel (`~$*`); `Costos.xlsx` es fuente del usuario (trackeado).
 
 ## Notas
