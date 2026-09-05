@@ -46,8 +46,8 @@
 ## Sesión actual: Página de costos independiente (agnóstica a costos)
 
 - La landing queda **100% agnóstica de costos**; se creó `costos.html` (raíz, misma identidad visual,
-  reúsa `assets/css/styles.css` + `assets/js/main.js`) con **CTA "Valores de referencia"** en la
-  sección final de la landing.
+  reúsa `assets/css/styles.css` + `assets/js/main.js`) con **CTA "Costos de referencia"** en la
+  sección final de la landing (sub-total de equipamiento sin leyenda "sin mano de obra": solo "USD").
 - Reglas de contenido: montos **solo en USD + fecha de vigencia** (05·09·2026); equivalencia en Bs
   **solo por contacto** (inflación en $ y Bs). Desglose = **Equipamiento** (con sub-total) +
   **Mano de obra → "A convenir"**. Nada más.
@@ -60,7 +60,7 @@
 ## Notas
 
 - Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`. Final: `2e33890`, `35ca8e4`,
-  `5c5e871`, `a60f861`. Push y verificación en producción: los ejecuta el usuario.
+  `5c5e871`, `a60f861`, `7e1edec`, `b5aab6a`. Push y verificación en producción: los ejecuta el usuario.
 
 ## Despliegue (resuelto en esta sesión)
 
