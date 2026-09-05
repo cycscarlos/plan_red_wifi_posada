@@ -475,3 +475,109 @@ a { color: inherit; }
   .stage__num { width: 32px; height: 32px; font-size: 0.72rem; }
   .band__row { grid-template-columns: 1fr; gap: 4px; padding: 12px 18px; }
 }
+
+/* ==========================================================================
+   LICENCIA (candado de acceso) - assets/js/license.js
+   ========================================================================== */
+.license-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--ink-950);
+  --lic-danger: #ff9d9d;
+}
+.license-overlay--hidden { display: none; }
+
+.license-panel {
+  width: 100%;
+  max-width: 460px;
+  background: var(--ink-850);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: license-rise 0.5s var(--ease);
+}
+@keyframes license-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.license-panel__title { font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+.license-panel__intro { color: var(--paper-dim); font-size: 0.95rem; margin-bottom: 18px; }
+.license-panel__form { display: flex; flex-direction: column; gap: 12px; }
+
+.license-panel__input {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink-900);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.license-panel__input:focus {
+  outline: none;
+  border-color: var(--blue-400);
+  box-shadow: 0 0 0 3px rgba(53, 197, 240, 0.15);
+}
+.license-panel__input[readonly] { opacity: 0.6; }
+
+.license-panel__btn { justify-content: center; width: 100%; }
+
+.license-panel__status {
+  font-size: 0.88rem;
+  color: var(--paper-dim);
+  margin: 0 0 14px 0;
+  min-height: 1.2em;
+}
+.license-panel__status--error { color: var(--lic-danger); }
+
+.license-panel__note {
+  font-size: 0.8rem;
+  color: var(--slate-500);
+  margin: 18px 0 0 0;
+}
+
+/* Pill de estado (licencia activa) */
+.license-pill {
+  position: fixed;
+  top: 84px;
+  right: 16px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--paper-dim);
+  background: rgba(13, 22, 38, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: license-rise 0.4s var(--ease);
+}
+.license-pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--mint-400);
+  box-shadow: 0 0 0 0 rgba(77, 232, 195, 0.5);
+  animation: pulseDot 2.2s ease-out infinite;
+}
