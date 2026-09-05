@@ -32,6 +32,7 @@
         </a>
         <nav class="nav__links" aria-label="Navegación principal">
           <a href="#resumen">Resumen</a>
+          <a href="#premisas">Premisas</a>
           <a href="#topologia">Topología</a>
           <a href="#canales">Canales</a>
           <a href="#guia">Guía</a>
@@ -48,6 +49,7 @@
       </div>
       <nav class="nav__mobile" id="navMobile" aria-label="Navegación móvil">
         <a href="#resumen">Resumen</a>
+        <a href="#premisas">Premisas</a>
         <a href="#topologia">Topología</a>
         <a href="#canales">Canales</a>
         <a href="#guia">Guía</a>
@@ -73,7 +75,7 @@
         <div class="hero__actions reveal">
           <a href="#guia" class="btn btn--primary">Ver la guía de configuración</a>
           <a
-            href="assets/docs/Plan-Tecnico-de-Red.pdf"
+            href="assets/docs/Plan-tecnico-red-wifi.pdf"
             download
             class="btn btn--ghost"
           >
@@ -198,14 +200,123 @@
       </div>
     </section>
 
+    <!-- ============ PREMISAS DE DISEÑO ============ -->
+    <section class="section section--panel" id="premisas">
+      <div class="section__inner">
+        <p class="eyebrow reveal">02 · Premisas de diseño</p>
+        <h2 class="reveal">Reglas definitivas, sin ventanas abiertas</h2>
+        <p class="section__lead reveal">
+          Son vinculantes para la implementación: lo que no está aquí no se
+          asume, y eliminan cualquier interpretación a conveniencia.
+        </p>
+        <div class="principles">
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">01</div>
+            <h3>Dos SSID · bandas fijas</h3>
+            <p>
+              TV-Manantial solo en <strong>2.4 GHz</strong> · Clientes-Manantial
+              solo en <strong>5 GHz</strong>. Sin band steering ni cambio de
+              banda.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">02</div>
+            <h3>2.4 GHz · canales fijos</h3>
+            <p>
+              1 / 6 / 11, uno por AP, bajo plan manual. Ancho
+              <strong>20 MHz</strong> — el menor, el que menos se solapa. Sin
+              canal automático.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">03</div>
+            <h3>5 GHz · canal 36 único</h3>
+            <p>
+              Co-canal para backhaul mesh y clientes — condición de la malla.
+              <span class="mono">802.11k/v</span> activo en Clientes para
+              móviles.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">04</div>
+            <h3>Sin roaming en TV</h3>
+            <p>
+              <span class="mono">802.11k/v/r</span> desactivado en
+              TV-Manantial: los TV son fijos y no deben sondear saltos de AP.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">05</div>
+            <h3>Expansión in-wall 2 + 2</h3>
+            <p>
+              Se despliegan <strong>2 GWN7661</strong> (6 TV cableados). Dos
+              unidades más, solo si la medición tras la Fase 1 las justifica.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">06</div>
+            <h3>Potencia mínima en GWN7661</h3>
+            <p>
+              Radio <strong>2.4 GHz apagado</strong> y 5 GHz al mínimo que
+              sostenga el enlace (~10–12 dBm) para no ensuciar el espectro.
+              Los TV van por los puertos <strong>LAN RJ45</strong>, no por
+              Wi-Fi: el 5 GHz solo es el puente mesh hacia la malla.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">07</div>
+            <h3>TV-Manantial oculta</h3>
+            <p>
+              <span class="mono">Hide SSID</span> +
+              <span class="mono">Client Isolation</span>: solo la ven los TV
+              autorizados y no se comunican entre sí.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">08</div>
+            <h3>Sin tasas legacy</h3>
+            <p>
+              OFF 1 / 2 / 5.5 / 11 Mbps (<span class="mono">CCK 802.11b</span>);
+              tasa mínima <strong>12 Mbps OFDM</strong> — un cliente lento no
+              congela el aire.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">09</div>
+            <h3>Multicast → Unicast</h3>
+            <p>
+              Habilitado: se elimina el broadcast inútil en el streaming de TV.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">10</div>
+            <h3>Validación en campo</h3>
+            <p>
+              Medir cobertura 5G interior de Clientes (banda fija).
+              <strong>Plan B:</strong> AP adicional si una zona no alcanza.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">11</div>
+            <h3>Endurecimiento opcional</h3>
+            <p>
+              Separación por <span class="mono">VLAN</span> entre huéspedes y TV
+              si se desea mayor aislamiento (fuera del alcance base).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ TOPOLOGÍA ============ -->
     <section class="section section--panel" id="topologia">
       <div class="section__inner">
-        <p class="eyebrow reveal">02 · Topología mesh</p>
+        <p class="eyebrow reveal">03 · Topología mesh</p>
         <h2 class="reveal">Un máster y dos saltos, todo en 5 GHz</h2>
         <p class="section__lead reveal">
-          El tráfico pesa sobre el backhaul inalámbrico de 5 GHz. Los TV salen
-          de la banda de 2.4 GHz quedando solo para clientes de corto alcance.
+          Todo el backhaul viaja en 5 GHz. El 2.4 GHz queda dedicado en
+          exclusiva a los TV que aún no se cablean; los clientes móviles usan
+          solo 5 GHz.
         </p>
         <div class="nodes">
           <div class="nodecard reveal">
@@ -263,7 +374,7 @@
     <!-- ============ CANALES ============ -->
     <section class="section" id="canales">
       <div class="section__inner">
-        <p class="eyebrow reveal">03 · Plan de canales</p>
+        <p class="eyebrow reveal">04 · Plan de canales</p>
         <h2 class="reveal">Manual, fijo, y sin canales que se solapen</h2>
         <p class="section__lead reveal">
           Se elimina la selección automática de canal. Cada banda tiene su
@@ -296,9 +407,9 @@
             </div>
             <div class="band__row reveal">
               <span class="band__node">GWN7661 · Pasillos</span>
-              <span class="band__cell mono">1 u 11 · o OFF</span>
-              <span class="band__cell mono">~10 dBm / OFF</span>
-              <span class="band__cell">Si los TV van por cable</span>
+              <span class="band__cell mono">—</span>
+              <span class="band__cell mono">Radio OFF</span>
+              <span class="band__cell">TV van por cable RJ45</span>
             </div>
           </div>
         </div>
@@ -330,8 +441,8 @@
             <div class="band__row reveal">
               <span class="band__node">GWN7661 · Pasillos</span>
               <span class="band__cell mono">Canal 36 · auto-mesh</span>
-              <span class="band__cell mono">~16 dBm</span>
-              <span class="band__cell">Salto único + clientes</span>
+              <span class="band__cell mono">~10–12 dBm</span>
+              <span class="band__cell">Potencia mínima · salto único</span>
             </div>
           </div>
         </div>
@@ -341,7 +452,7 @@
     <!-- ============ GUÍA ============ -->
     <section class="section section--panel" id="guia">
       <div class="section__inner">
-        <p class="eyebrow reveal">04 · Guía de configuración</p>
+        <p class="eyebrow reveal">05 · Guía de configuración</p>
         <h2 class="reveal">Tres pasos en el panel GWN</h2>
         <p class="section__lead reveal">
           Accede al GWN7660LR (máster) o a GWN Cloud. Todo se resuelve en el
@@ -368,13 +479,20 @@
                 <ul class="stage__list">
                   <li>
                     SSID 1 — <span class="mono">Clientes-Manantial</span>:
-                    5 GHz, <span class="mono">802.11k/v</span> activado
+                    5 GHz Only · banda fija (sin band steering) ·
+                    <span class="mono">802.11k/v</span> activo para móviles
                   </li>
                   <li>
-                    SSID 2 — <span class="mono">TV-Manantial</span>: 2.4 GHz,
-                    <span class="mono">802.11k/v/r</span> desactivado (TV fijos)
+                    SSID 2 — <span class="mono">TV-Manantial</span>: 2.4 GHz
+                    Only · banda fija ·
+                    <span class="mono">802.11k/v/r</span> desactivado — TV
+                    fijos, sin roaming
                   </li>
-                  <li>SSID TV: <span class="mono">Hide SSID</span> + <span class="mono">Client Isolation</span> habilitados</li>
+                  <li>
+                    SSID TV: <span class="mono">Hide SSID</span> +
+                    <span class="mono">Client Isolation</span> habilitados — solo
+                    la ven los TV y no se hablan entre sí
+                  </li>
                 </ul>
               </div>
             </div>
@@ -397,9 +515,9 @@
               </button>
               <div class="stage__body">
                 <ul class="stage__list">
-                  <li>Radio 2.4G: ancho <span class="mono">20 MHz</span>, canal fijo según plan</li>
-                  <li>Radio 5G: ancho <span class="mono">40 MHz</span>, canal 36 fijo para estabilizar el mesh</li>
-                  <li>Tx Power: 2.4G <span class="mono">18 dBm</span> · 5G <span class="mono">22–23 dBm</span></li>
+                  <li>Radio 2.4G: ancho <span class="mono">20 MHz</span> (sin solape) · canal fijo 1 / 6 / 11 · sin canal automático</li>
+                  <li>Radio 5G: ancho <span class="mono">40 MHz</span> · canal <span class="mono">36</span> único co-canal (backhaul mesh + clientes)</li>
+                  <li>Tx Power: LR 2.4G <span class="mono">18 dBm</span> · 5G <span class="mono">22–23 dBm</span> · GWN7661 al mínimo</li>
                 </ul>
               </div>
             </div>
@@ -438,7 +556,7 @@
     <!-- ============ IN-WALL ============ -->
     <section class="section" id="inwall">
       <div class="section__inner">
-        <p class="eyebrow reveal">05 · Expansión in-wall</p>
+        <p class="eyebrow reveal">06 · Expansión in-wall</p>
         <h2 class="reveal">Cuando el resultado pide cable</h2>
         <p class="section__lead reveal">
           Si el streaming por aire no alcanza, los GWN7661 llevan los TV directo
@@ -458,7 +576,8 @@
             <h3>PoE local, mesh en 5 GHz</h3>
             <p>
               Se enciende con un inyector PoE y descubre al máster con enlace
-              de salto único hacia el GWN7630LR cercano.
+              de salto único hacia el GWN7630LR cercano, a
+              <strong>potencia mínima</strong>.
             </p>
           </div>
           <div class="principle reveal">
@@ -473,8 +592,8 @@
             <div class="principle__icon" aria-hidden="true">◷</div>
             <h3>Cero ruido en 2.4 GHz</h3>
             <p>
-              El 100% del tráfico de esos TV sale por cable: nada de broadcast
-              inalámbrico.
+              El 100% del tráfico de esos TV sale por cable y la radio
+              2.4 GHz del GWN7661 queda apagada: cero ruido inalámbrico.
             </p>
           </div>
           <div class="principle reveal">
@@ -484,10 +603,11 @@
           </div>
           <div class="principle reveal">
             <div class="principle__icon" aria-hidden="true">◉</div>
-            <h3>Condicional a Fase 1</h3>
+            <h3>Arranque 2 + 2</h3>
             <p>
-              Se despliega solo si, cerrada la optimización de software, la
-              banda aún se satura en horas altas.
+              Se instalan <strong>2 GWN7661</strong> (6 TV cableados). Otras 2
+              unidades solo si la medición tras la Fase 1 las justifica — nunca
+              por adelantado.
             </p>
           </div>
         </div>
@@ -503,7 +623,7 @@
           el documento técnico.
         </p>
         <a
-          href="assets/docs/Plan-Tecnico-de-Red.pdf"
+          href="assets/docs/Plan-tecnico-red-wifi.pdf"
           download
           class="btn btn--primary btn--lg"
         >

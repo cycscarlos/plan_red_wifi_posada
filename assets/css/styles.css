@@ -245,6 +245,7 @@ a { color: inherit; }
 .principle { background: var(--ink-850); padding: 30px 26px; transition: background 0.25s; }
 .principle:hover { background: var(--ink-800); }
 .principle__icon { color: var(--blue-400); font-size: 1.4rem; margin-bottom: 14px; }
+.principle__icon--num { font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 0.05em; margin-bottom: 16px; }
 .principle p { font-size: 0.9rem; margin: 0; }
 
 /* ==========================================================================
