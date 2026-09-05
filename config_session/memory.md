@@ -4,6 +4,23 @@
 
 - Proyecto: Plan de implementación de redes Wi-Fi Online para Posada Casa Manantial
 
+## Sesión actual: Candado de licencia AuthCenter (producto MANANTIAL) + pill de días
+
+- La landing y `costos.html` quedan **protegidas** con licencia por tiempo validada contra
+  AuthCenter (emisor central de licencias), **sin BDD local**: caché en `localStorage`.
+- **Nuevo `assets/js/license.js`** (IIFE ES5, como `main.js`): overlay opaco + modal
+  "Activar Licencia" (clave → `POST validate-license`), revalidación cada 24 h, gracia
+  offline 72 h, fail-closed. Se carga al inicio de `<body>` en ambas páginas (caché compartida).
+- **Pill fija discreta** (`.license-pill`, top: 84px para no tapar el nav 72px): muestra
+  `Licencia activa · N días · expira DD/MM/YYYY`; se oculta con el candado.
+- Producto **MANANTIAL creado en AuthCenter** (activo=true, 05·09·2026) + secreto
+  `LICENSE_SECRET_MANANTIAL` (hex64) configurado en Supabase + clave de prueba emitida y
+  probada con éxito por el usuario. URL de validación usada:
+  `https://ijvevdplnovkewxifpmf.supabase.co/functions/v1/validate-license`.
+- `assets/docs/Tabla_productos.json` (evidencia del alta) **gitignoreado** (no se commitea).
+- **Límite aceptado por el usuario:** candado 100% cliente = eludible por URL directa del PDF
+  (GitHub Pages); es gestión de acceso, no cifrado. "Nada es gratis": sin vista libre.
+
 ## Sesión actual: Premisas de diseño (11) incorporadas a informe y landing
 
 - El usuario confirmó la síntesis de las 7 premisas y pidió cerrar ambigüedades:
@@ -55,12 +72,13 @@
   (= $279.00) · Switch GWN7801P ×1 @ $208.50 · Bobina UTP Cat.6e @ $100.00 → **Subtotal $587.50**.
   Mano de obra: **A convenir**. Los AP **GWN7660LR/GWN7630LR ya existen y operan → no se cotizan**.
 - Sin CTA de cotización directo en la página de costos: solo informa; el contacto se gestiona aparte.
-- `.gitignore` ignora el temporal de Excel (`~$*`); `Costos.xlsx` es fuente del usuario (trackeado).
+- `.gitignore` ahora ignora también `assets/docs/Tabla_productos.json`; `Costos.xlsx` queda trackeado.
 
 ## Notas
 
-- Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`. Final: `2e33890`, `35ca8e4`,
-  `5c5e871`, `a60f861`, `7e1edec`, `b5aab6a`. Push y verificación en producción: los ejecuta el usuario.
+- Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`. Finales: `2e33890`, `35ca8e4`,
+  `5c5e871`, `a60f861`, `7e1edec`, `b5aab6a`, `67b26df` (candado + pill). Push y verificación
+  en producción: los ejecuta el usuario.
 
 ## Despliegue (resuelto en esta sesión)
 
