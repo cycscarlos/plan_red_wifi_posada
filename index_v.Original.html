@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Propuesta de Servicios — Red WiFi · Casa Manantial</title>
+    <meta
+      name="description"
+      content="Propuesta de servicios en dos fases para resolver el buffering de TV en Casa Manantial: diagnóstico e ingeniería de software, y mejoras estructurales condicionadas al resultado."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2304080f%22/><circle cx=%2250%22 cy=%2250%22 r=%2216%22 fill=%22none%22 stroke=%22%2335c5f0%22 stroke-width=%228%22/></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="#top" aria-label="Inicio">
+          <span class="nav__pulse" aria-hidden="true"></span>
+          <span class="nav__mark"
+            >CYCS <span class="nav__mark-accent">& Co.</span></span
+          >
+        </a>
+        <nav class="nav__links" aria-label="Navegación principal">
+          <a href="#diagnostico">Diagnóstico</a>
+          <a href="#principios">Estándar</a>
+          <a href="#fases">Fases</a>
+          <a href="#gobernanza">Gobernanza</a>
+          <a href="#propuesta">Propuesta</a>
+        </nav>
+        <button
+          class="nav__toggle"
+          id="navToggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav__mobile" id="navMobile" aria-label="Navegación móvil">
+        <a href="#diagnostico">Diagnóstico</a>
+        <a href="#principios">Estándar</a>
+        <a href="#fases">Fases</a>
+        <a href="#gobernanza">Gobernanza</a>
+        <a href="#propuesta">Propuesta</a>
+      </nav>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="eyebrow reveal">Propuesta de servicios · Ingeniería de redes</p>
+        <h1 class="hero__title reveal">
+          El diagnóstico cambió.<br /><span class="hero__title-accent"
+            >La estrategia, también.</span
+          >
+        </h1>
+        <p class="hero__sub reveal">
+          Las pruebas de campo aislaron la causa real del buffering en los 31
+          televisores: no es falta de cobertura — es un solo canal,
+          compartido por todos, saturado. Esta propuesta separa lo que ya se
+          puede resolver de lo que todavía depende de ver el resultado.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#fases" class="btn btn--primary">Ver las dos fases</a>
+          <a
+            href="assets/propuesta_fase1_fase2.pdf"
+            download
+            class="btn btn--ghost"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+            </svg>
+            Descargar propuesta
+          </a>
+        </div>
+
+        <div class="hero__monitor reveal" aria-hidden="true">
+          <svg viewBox="0 0 1200 160" class="ekg" preserveAspectRatio="none">
+            <path
+              id="ekgPath"
+              d="M0,80 L140,80 L165,80 L180,30 L200,130 L220,80 L260,80 L620,80 L645,80 L660,30 L680,130 L700,80 L740,80 L1100,80 L1120,80 L1135,30 L1155,130 L1175,80 L1200,80"
+              fill="none"
+              stroke="url(#ekgGrad)"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="ekgGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#35c5f0" stop-opacity="0" />
+                <stop offset="15%" stop-color="#35c5f0" />
+                <stop offset="50%" stop-color="#4de8c3" />
+                <stop offset="85%" stop-color="#35c5f0" />
+                <stop offset="100%" stop-color="#35c5f0" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="hero__monitor-label">
+            <span class="dot"></span> ESTADO DE RED — DIAGNÓSTICO CONFIRMADO
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-label="Datos del sitio">
+      <div class="stats__inner">
+        <div class="stat reveal">
+          <span class="stat__value" data-count="1800">0</span>
+          <span class="stat__unit">m²</span>
+          <span class="stat__label">Área del sitio</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="31">0</span>
+          <span class="stat__unit">TVs</span>
+          <span class="stat__label">Google TV, 2.4 GHz exclusivo</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="150">0</span>
+          <span class="stat__unit">+</span>
+          <span class="stat__label">Usuarios concurrentes</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="3">0</span>
+          <span class="stat__unit">canales</span>
+          <span class="stat__label">Sin solape disponibles en 2.4 GHz</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIAGNÓSTICO ============ -->
+    <section class="section" id="diagnostico">
+      <div class="section__inner">
+        <p class="eyebrow reveal">01 · Diagnóstico</p>
+        <h2 class="reveal">
+          No era falta de cobertura. Era un solo canal, sobrecargado.
+        </h2>
+        <div class="split">
+          <div class="split__col reveal">
+            <p>
+              La hipótesis inicial — dos zonas sin cobertura — no resistió la
+              prueba de campo: el mismo patrón de buffering apareció incluso
+              en la habitación con mejor ubicación posible de toda la
+              propiedad, a metros del punto de acceso y con línea de vista
+              directa a dos nodos distintos.
+            </p>
+            <p>
+              Una prueba cableada — el mismo modelo de TV, conectado por
+              Ethernet al mismo router del ISP — reprodujo sin un solo corte.
+              Eso descarta el televisor y descarta el proveedor de Internet.
+              El problema vive exclusivamente en el tramo inalámbrico. Y los
+              31 televisores comparten una limitación de hardware: se
+              conectan solo en <strong>2.4 GHz</strong>, sin roaming — una
+              banda con apenas tres canales sin solape, para todos a la vez,
+              sin importar dónde esté cada uno.
+            </p>
+          </div>
+          <div class="split__col reveal">
+            <div class="diagcard">
+              <div class="diagcard__row">
+                <span class="diagcard__k">Prueba cableada</span>
+                <span class="diagcard__v">Sin buffering — descarta TV e Internet</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Banda de los TV</span>
+                <span class="diagcard__v">2.4 GHz exclusivo, sin roaming</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Canales sin solape disponibles</span>
+                <span class="diagcard__v">3 (1 / 6 / 11)</span>
+              </div>
+              <div class="diagcard__row diagcard__row--accent">
+                <span class="diagcard__k">Causa raíz confirmada</span>
+                <span class="diagcard__v"
+                  >Saturación de aire en 2.4 GHz — no cobertura</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRINCIPIOS ============ -->
+    <section class="section section--panel" id="principios">
+      <div class="section__inner">
+        <p class="eyebrow reveal">02 · Estándar de ejecución</p>
+        <h2 class="reveal">Lo que esta propuesta garantiza</h2>
+        <p class="section__lead reveal">
+          Cada tarea de la Fase 1 se ejecuta bajo las mismas seis reglas no
+          negociables, sin excepción.
+        </p>
+        <div class="principles">
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◇</div>
+            <h3>Respaldo antes de tocar</h3>
+            <p>
+              Ninguna configuración cambia sin un respaldo verificado del
+              estado anterior.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◆</div>
+            <h3>Cambio atómico</h3>
+            <p>Toda intervención es reversible en menos de 15 minutos.</p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">▣</div>
+            <h3>Un solo cambio a la vez</h3>
+            <p>
+              Canal, potencia y tasas no se tocan el mismo día — para poder
+              atribuir cada resultado a su causa.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◷</div>
+            <h3>Ventana obligatoria</h3>
+            <p>
+              Los cortes solo ocurren en la franja diurna de baja ocupación.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◈</div>
+            <h3>Validar con datos</h3>
+            <p>
+              El cierre de cada fase se mide en los mismos puntos ya
+              documentados — no se decide por percepción.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon" aria-hidden="true">◉</div>
+            <h3>Nada por adelantado</h3>
+            <p>
+              Ningún equipo se compra ni se cotiza antes de cerrar la fase que
+              lo justifica.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FASES ============ -->
+    <section class="section" id="fases">
+      <div class="section__inner">
+        <p class="eyebrow reveal">03 · Alcance del proyecto</p>
+        <h2 class="reveal">Dos fases. La segunda depende de la primera.</h2>
+        <p class="section__lead reveal">
+          No son etapas independientes de un mismo presupuesto — la Fase 2 es
+          un co-requisito de la Fase 1: no se cotiza, ni se compra, ni se
+          ejecuta hasta que la Fase 1 cierre con datos reales sobre la mesa.
+        </p>
+
+        <div class="timeline" id="timeline">
+          <article class="stage reveal" data-stage="1">
+            <div class="stage__rail">
+              <span class="stage__num">01</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Diagnóstico e ingeniería de software</h3>
+                  <div class="badges">
+                    <span class="badge badge--low">Sin equipos nuevos</span>
+                    <span class="badge badge--high">Impacto alto</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <p>
+                  Consultoría especializada de ingeniería de redes. Aísla y
+                  corrige la causa raíz confirmada — saturación del canal
+                  compartido por los 31 TV — ajustando exclusivamente la
+                  configuración de los 3 nodos ya instalados. No requiere
+                  comprar ni instalar equipo nuevo.
+                </p>
+                <ul class="stage__list">
+                  <li>
+                    Informe de diagnóstico y causa raíz — pruebas de campo,
+                    verificación de banda, prueba cableada de control
+                  </li>
+                  <li>
+                    <span class="mono">Plan de canales 1 / 6 / 11</span> —
+                    Master, Terraza y Piso 2, Auto Channel desactivado
+                  </li>
+                  <li>
+                    Eliminación de tasas legacy 802.11b · ancho de canal
+                    <span class="mono">20 MHz</span> confirmado
+                  </li>
+                  <li>
+                    Prueba controlada post-cambio en los mismos puntos ya
+                    documentados — Habitación 13 y TV junto al Master
+                  </li>
+                  <li>
+                    Cierre: informe de resultados medidos (antes / después) y
+                    recomendación formal sobre la necesidad de la Fase 2
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="2">
+            <div class="stage__rail">
+              <span class="stage__num">02</span>
+            </div>
+            <div class="stage__card stage__card--conditional">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>
+                    Mejoras estructurales de la red
+                    <span class="conditional-tag"
+                      >condicional · co-requisito de Fase 1</span
+                    >
+                  </h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Equipos + instalación</span>
+                    <span class="badge badge--med"
+                      >Alcance definido tras Fase 1</span
+                    >
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <p>
+                  No se ejecuta ni se cotiza por adelantado. Se activa
+                  únicamente si, tras cerrar la Fase 1 con datos, el margen de
+                  capacidad en 2.4 GHz sigue siendo insuficiente en horas de
+                  ocupación alta.
+                </p>
+                <ul class="stage__list">
+                  <li>
+                    Reuso de frecuencia: más celdas 2.4 GHz de menor potencia,
+                    reutilizando los mismos 3 canales sin que se solapen entre
+                    sí
+                  </li>
+                  <li>Suministro de equipos adicionales, transporte y logística</li>
+                  <li>
+                    Instalación en sitio y configuración de compatibilidad con
+                    los nodos existentes
+                  </li>
+                  <li>
+                    Alcance exacto y condiciones comerciales, entregados como
+                    documento aparte una vez cerrada la Fase 1
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GOBERNANZA ============ -->
+    <section class="section section--panel" id="gobernanza">
+      <div class="section__inner">
+        <p class="eyebrow reveal">04 · Gobernanza</p>
+        <h2 class="reveal">Cómo se decide avanzar</h2>
+        <div class="gov">
+          <div class="gov__card reveal">
+            <h3>La Fase 1 cierra con datos</h3>
+            <p>
+              Se mide, no se percibe: los mismos puntos de prueba ya
+              documentados — Habitación 13, TV junto al Master — antes y
+              después del cambio.
+            </p>
+          </div>
+          <div class="gov__card reveal">
+            <h3>La Fase 2 se cotiza aparte</h3>
+            <p>
+              Su alcance y sus condiciones comerciales dependen enteramente
+              de lo que la Fase 1 deje pendiente — nunca se definen por
+              adelantado.
+            </p>
+          </div>
+          <div class="gov__card reveal">
+            <h3>Nada se compra antes de tiempo</h3>
+            <p>
+              Ningún equipo se adquiere ni se transporta hasta el cierre
+              formal y medido de la Fase 1.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="cta" id="propuesta">
+      <div class="cta__inner reveal">
+        <h2>La propuesta completa, con alcance y condiciones de cada fase.</h2>
+        <p>
+          Diagnóstico confirmado, alcance detallado de la Fase 1, condiciones
+          de activación de la Fase 2 y gobernanza — todo en el documento
+          formal, listo para revisión.
+        </p>
+        <a
+          href="assets/propuesta_fase1_fase2.pdf"
+          download
+          class="btn btn--primary btn--lg"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+          </svg>
+          Descargar Propuesta
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>CYCS & Co. — Ingeniería de redes inalámbricas</span>
+        <span
+          >Copyright © Desarrollado por Carlos Colmenares A. | Derechos
+          Reservados · 2026</span
+        >
+      </div>
+    </footer>
+
+    <button
+      class="scrollFab"
+      id="scrollFab"
+      type="button"
+      aria-label="Ir al final de la página"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
