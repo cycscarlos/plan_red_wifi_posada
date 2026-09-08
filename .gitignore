@@ -6,4 +6,4 @@ node_modules/
 trash/
 .agents/
 ~$*
-assets/docs/Tabla_productos.json
+assets/docs/**/Tabla_productos.json

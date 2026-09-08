@@ -4,7 +4,42 @@
 
 - Proyecto: Plan de implementación de redes Wi-Fi Online para Posada Casa Manantial
 
-## Sesión actual: Candado de licencia AuthCenter (producto MANANTIAL) + pill de días
+## Sesión actual: Solución híbrida (backbone + mesh 5 GHz) + costos $844.20 + reorganización docs
+
+- **La solución es HÍBRIDA** (decisión del usuario, no "todo cable"): backbone UTP Cat.6e para TV
+  fijos + la malla mesh 5 GHz que ya existe (GWN7660LR máster / GWN7630LR Terraza y Piso 2) +
+  segmentación SSID/VLAN. Mensaje recalibrado en landing y docx: sin protagonismo del número de TV
+  (el conteo 31→32 queda SOLO como dato técnico de contexto).
+- Inventario autorizado (desde `assets/docs/Habitaciones-TV.xlsx` del usuario): **29 unidades / 32 TV**
+  (22 habitaciones + 7 apartamentos + 3 áreas de servicio). El 32.º TV = 2 pantallas en el
+  apartamento principal del Piso 2. El usuario pidió **cero referencias a personas** en documentos
+  profesionales (nada de "dueño"/"propietario": se usa "apartamento principal").
+- **Equipamiento definitivo (sin PoE en switchs; APs con su inyector 110 VAC local)**:
+  core **GWN7801 ×1** (8 GE + 2 SFP) · acceso **GWN7711 ×6 @ $26.00** (PB, P1, P2-A, P2-B, Oficina,
+  UP-Cocina) · in-wall **GWN7661 ×2** (Tour 3 TV, Piscina 2 TV + 1 puerto libre) · switch básico
+  **GWN7700** en el apartamento principal (2 TV) · máster GWN7660LR + mesh GWN7630LR (existentes).
+  Los AP mesh **nunca** se alimentan de un switch.
+- **Costos.xlsx del usuario (costos3) → `costos.html` actualizado**: GWN7801 ×1 $175.50 · GWN7711 ×6
+  $26.00 c/u = $156.00 · GWN7661 ×2 $181.35 c/u = $362.70 · Bobina Cat.6e $100.00 · Accesorios $50.00
+  → **Subtotal $844.20** · Mano de obra **A convenir**. Fecha de vigencia 05·09·2026.
+- Arquitectura: **core 7/8 puertos usados** (1 ISP · 2 máster trunk · 3 PB · 4 P1 · 5 P2-A · 6 P2-B ·
+  7 Oficina · 8 reserva). **UP-Cocina no va al core**: cuelga en cascada del GWN7711 de Oficina.
+  Los 2 TV re-parcheados de P2 van al GWN7711 de P2 (no al core).
+- **Premisas 01–13** (docx + landing). Premisa 01 = "Solución híbrida: dos vías de tráfico". Se
+  eliminó la expansión in-wall "2+2" (quedan 2 GWN7661 definitivos).
+- **Reorganización del usuario**: los respaldos/versiones viejas van a
+  `assets/docs/Versiones-anteriores/` (Costos_reales.xlsx, Opinión de IA Gemini.txt,
+  Plan-tecnico-red-wifi.pdf viejo, Plan-tecnico-red-wifi_v.Original.pdf, Tabla_productos.json).
+  `.gitignore` cubre `assets/docs/**/Tabla_productos.json` (evidencia, no se commitea).
+  El PDF vigente `assets/docs/Plan-tecnico-red-wifi.pdf` lo regenera el usuario desde el docx (Word).
+- El docx se edita vía zip→XML→zip (generador Node en `C:\Users\zcoder\AppData\Local\Temp\opencode\build\gen.js`,
+  estilos Ttulo1/Ttulo2/Compact/FirstParagraph + tablas `Table`); luego el usuario regenera el PDF.
+- Landing `index.html`: hero híbrido ("Cable para los TV fijos. Mesh 5 GHz para el resto. El aire
+  segmentado."), stats sin conteo de TV (1800 m² · 2 SSID · 2 vías · 5 GHz), premisas 01–13,
+  topología "Cable y mesh 5 GHz: dos vías, un plan", sección in-wall Tour/Piscina. `costos.html`
+  con CTA "Costos de referencia".
+
+## Sesión previa: Candado de licencia AuthCenter (producto MANANTIAL) + pill de días
 
 - La landing y `costos.html` quedan **protegidas** con licencia por tiempo validada contra
   AuthCenter (emisor central de licencias), **sin BDD local**: caché en `localStorage`.
@@ -76,9 +111,10 @@
 
 ## Notas
 
-- Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`. Finales: `2e33890`, `35ca8e4`,
-  `5c5e871`, `a60f861`, `7e1edec`, `b5aab6a`, `67b26df` (candado + pill). Push y verificación
-  en producción: los ejecuta el usuario.
+- Checkpoints: `43a87bf`, `e290496`, `933ed9e`, `53c93a4`, `cff0e50` (diseño backbone + GWN7711 ×6 +
+  cobertura 32 TV + cascada zona trasera). Finales: `2e33890`, `35ca8e4`, `5c5e871`, `a60f861`,
+  `7e1edec`, `b5aab6a`, `67b26df` (candado + pill) y el de esta sesión (solución híbrida + costos
+  $844.20 + reorganización `Versiones-anteriores/`). Push y verificación en producción: el usuario.
 
 ## Despliegue (resuelto en esta sesión)
 

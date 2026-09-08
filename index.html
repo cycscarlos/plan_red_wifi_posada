@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plan Técnico de Red Mesh GWN — Posada Casa Manantial</title>
+    <title>Plan Técnico de Red Backbone GWN — Posada Casa Manantial</title>
     <meta
       name="description"
-      content="Plan técnico de redes y guía de configuración mesh GWN para Posada Casa Manantial: segmentación de SSIDs, plan de canales y despliegue de APs in-wall que eliminan el buffering de 31 Smart TV."
+      content="Plan técnico de redes y guía de configuración backbone cableado GWN para Posada Casa Manantial: segmentación de SSIDs, plan de canales y switchs de acceso GWN7711 que eliminan el buffering de 32 Smart TV."
     />
     <link
       rel="icon"
@@ -62,16 +62,18 @@
     <section class="hero" id="top">
       <div class="hero__grid" aria-hidden="true"></div>
       <div class="hero__inner">
-        <p class="eyebrow reveal">Plan técnico · Red mesh GWN</p>
+        <p class="eyebrow reveal">Plan técnico · Red híbrida GWN (cable + mesh)</p>
         <h1 class="hero__title reveal">
-          Treinta y un TV. <br />Tres canales.<br /><span class="hero__title-accent"
-            >Una sola solución.</span
+          Cable para los TV fijos. <br />Mesh 5 GHz para el resto.<br /><span
+            class="hero__title-accent"
+            >El aire, segmentado.</span
           >
         </h1>
         <p class="hero__sub reveal">
           Los Smart TV solo usan 2.4 GHz y compiten por tres canales con
-          selección automática. <br/>La solución: dos SSIDs segmentados y un backhaul
-          mesh de 5 GHz que retira los TV del aire.
+          selección automática. <br/>La solución es híbrida: backbone UTP Cat.6e
+          para los TV fijos, malla 5 GHz para lo que no se cablea y dos SSIDs
+          segmentados que apartan el streaming del tráfico de huéspedes.
         </p>
         <div class="hero__actions reveal">
           <a href="#guia" class="btn btn--primary">Ver la guía de configuración</a>
@@ -118,7 +120,7 @@
             </defs>
           </svg>
           <div class="hero__monitor-label">
-            <span class="dot"></span> RED MESH GWN — PLAN DE CONFIGURACIÓN
+            <span class="dot"></span> RED HÍBRIDA GWN — CABLE + MESH 5 GHz
           </div>
         </div>
       </div>
@@ -133,19 +135,19 @@
           <span class="stat__label">Área del sitio</span>
         </div>
         <div class="stat reveal">
-          <span class="stat__value" data-count="31">0</span>
-          <span class="stat__unit">TV</span>
-          <span class="stat__label">Smart TV · 2.4 GHz exclusivo</span>
+          <span class="stat__value" data-count="2">0</span>
+          <span class="stat__unit">SSIDs</span>
+          <span class="stat__label">Clientes 5 GHz · TV 2.4 GHz</span>
         </div>
         <div class="stat reveal">
           <span class="stat__value" data-count="2">0</span>
-          <span class="stat__unit">SSIDs</span>
-          <span class="stat__label">Clientes · TV segmentadas</span>
+          <span class="stat__unit">vías</span>
+          <span class="stat__label">Cable UTP Cat.6e + mesh 5 GHz</span>
         </div>
         <div class="stat reveal">
           <span class="stat__value" data-count="5">0</span>
-          <span class="stat__unit">APs</span>
-          <span class="stat__label">Malla mesh en 5 GHz</span>
+          <span class="stat__unit">GHz</span>
+          <span class="stat__label">Mesh y clientes · canal 36</span>
         </div>
       </div>
     </section>
@@ -160,15 +162,17 @@
         <div class="split">
           <div class="split__col reveal">
             <p>
-              Los 31 Smart TV usan tarjetas Wi-Fi genéricas restringidas a
+              Los Smart TV usan tarjetas Wi-Fi genéricas restringidas a
               <strong>2.4 GHz</strong>: solo tres canales sin solape (1, 6 y
               11), bajo selección automática de canal. Todos compiten por el
               mismo aire — el origen del buffering.
             </p>
             <p>
-              La solución deja de pelear contra la banda y la estructura
-              directamente: separa el tráfico por SSID y, donde hace falta,
-              saca los TV del aire por cable.
+              La solución es <strong>híbrida</strong>: un backbone UTP Cat.6e
+              saca del aire los TV fijos y los lleva por cable a un switch de
+              acceso por zona; la malla 5 GHz cubre las áreas que no se cablean;
+              y dos SSID segmentados ordenan el tráfico de huéspedes y streaming
+              en bandas separadas.
             </p>
           </div>
           <div class="split__col reveal">
@@ -190,8 +194,12 @@
                 <span class="diagcard__v mono">TV-Manantial · 2.4 GHz</span>
               </div>
               <div class="diagcard__row">
-                <span class="diagcard__k">Switch core</span>
-                <span class="diagcard__v mono">GWN7801P · VLANes L2</span>
+                <span class="diagcard__k">Vía principal</span>
+                <span class="diagcard__v">Backbone UTP Cat.6e por zona</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Cobertura Wi‑Fi</span>
+                <span class="diagcard__v">Malla mesh 5 GHz + in-wall</span>
               </div>
               <div class="diagcard__row diagcard__row--accent">
                 <span class="diagcard__k">Causa raíz</span>
@@ -217,6 +225,35 @@
         <div class="principles">
           <div class="principle reveal">
             <div class="principle__icon principle__icon--num" aria-hidden="true">01</div>
+            <h3>Solución híbrida, no solo cable</h3>
+            <p>
+              El buffering se resuelve con las <strong>dos vías</strong>: el
+              backbone Cat.6e por zonas y la malla 5 GHz que ya está en el
+              sitio, ordenadas por los dos SSID segmentados. Cada TV cae en la
+              vía que le corresponde según su cobertura.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">02</div>
+            <h3>Backbone UTP Cat.6e</h3>
+            <p>
+              La vía principal es <strong>cableada por zonas</strong>: un switch
+              de acceso por piso / área saca los TV del aire. El Wi‑Fi queda
+              para huéspedes y zonas no cableables.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">03</div>
+            <h3>Switchs sin PoE</h3>
+            <p>
+              Core <span class="mono">GWN7801</span> + acceso
+              <span class="mono">GWN7711</span>: <strong>sin PoE</strong>. Todos
+              los APs se alimentan con su inyector PoE 110 VAC local; ningún AP
+              recibe energía de un switch.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">04</div>
             <h3>Dos SSID · bandas fijas</h3>
             <p>
               TV-Manantial solo en <strong>2.4 GHz</strong> · Clientes-Manantial
@@ -225,7 +262,7 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">02</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">05</div>
             <h3>2.4 GHz · canales fijos</h3>
             <p>
               1 / 6 / 11, uno por AP, bajo plan manual. Ancho
@@ -234,7 +271,7 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">03</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">06</div>
             <h3>5 GHz · canal 36 único</h3>
             <p>
               Co-canal para backhaul mesh y clientes — condición de la malla.
@@ -244,7 +281,7 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">04</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">07</div>
             <h3>Sin roaming en TV</h3>
             <p>
               <span class="mono">802.11k/v/r</span> desactivado en
@@ -252,25 +289,16 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">05</div>
-            <h3>Expansión in-wall 2 + 2</h3>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">08</div>
+            <h3>In-wall · Tour y Piscina</h3>
             <p>
-              Se despliegan <strong>2 GWN7661</strong> (6 TV cableados). Dos
-              unidades más, solo si la medición tras la Fase 1 las justifica.
+              2 APs <strong>GWN7661</strong>: Zona Tour (3 TV) y Zona Piscina
+              (2 TV). Potencia mínima, radio 2.4 GHz apagado; los TV van por
+              sus puertos LAN RJ45.
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">06</div>
-            <h3>Potencia mínima en GWN7661</h3>
-            <p>
-              Radio <strong>2.4 GHz apagado</strong> y 5 GHz al mínimo que
-              sostenga el enlace (~10–12 dBm) para no ensuciar el espectro.
-              Los TV van por los puertos <strong>LAN RJ45</strong>, no por
-              Wi-Fi: el 5 GHz solo es el puente mesh hacia la malla.
-            </p>
-          </div>
-          <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">07</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">09</div>
             <h3>TV-Manantial oculta</h3>
             <p>
               <span class="mono">Hide SSID</span> +
@@ -279,7 +307,7 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">08</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">10</div>
             <h3>Sin tasas legacy</h3>
             <p>
               OFF 1 / 2 / 5.5 / 11 Mbps (<span class="mono">CCK 802.11b</span>);
@@ -288,28 +316,30 @@
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">09</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">11</div>
             <h3>Multicast → Unicast</h3>
             <p>
               Habilitado: se elimina el broadcast inútil en el streaming de TV.
             </p>
           </div>
           <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">10</div>
-            <h3>Validación en campo</h3>
-            <p>
-              Medir cobertura 5G interior de Clientes (banda fija).
-              <strong>Plan B:</strong> AP adicional si una zona no alcanza.
-            </p>
-          </div>
-          <div class="principle reveal">
-            <div class="principle__icon principle__icon--num" aria-hidden="true">11</div>
+            <div class="principle__icon principle__icon--num" aria-hidden="true">12</div>
             <h3>Segmentación L2 por VLAN</h3>
             <p>
               <span class="mono">VLAN 10</span> — huéspedes (5 GHz) ·
               <span class="mono">VLAN 20</span> — TV (2.4 GHz + puertos LAN de
               los GWN7661) · <span class="mono">VLAN 1</span> — gestión. El
               tráfico de los TV queda confinado sin contaminar a los huéspedes.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">13</div>
+            <h3>Cascada UP-Cocina</h3>
+            <p>
+              El <span class="mono">GWN7711</span> de UP-Cocina se conecta por
+              cable al switch de la <strong>Oficina Administrativa</strong>, y
+              este último al core — la zona trasera no ocupa puerto en el
+              GWN7801.
             </p>
           </div>
         </div>
@@ -319,60 +349,82 @@
     <!-- ============ TOPOLOGÍA ============ -->
     <section class="section section--panel" id="topologia">
       <div class="section__inner">
-        <p class="eyebrow reveal">03 · Topología mesh</p>
-        <h2 class="reveal">Un máster y dos saltos, todo en 5 GHz</h2>
+        <p class="eyebrow reveal">03 · Topología híbrida</p>
+        <h2 class="reveal">Cable y mesh 5 GHz: dos vías, un plan</h2>
         <p class="section__lead reveal">
-          Todo el backhaul viaja en 5 GHz. El 2.4 GHz queda dedicado en
-          exclusiva a los TV que aún no se cablean; los clientes móviles usan
-          solo 5 GHz.
+          La solución combina <strong>dos vías de tráfico</strong>. Por un lado
+          el backbone UTP Cat.6e: un switch de acceso
+          <span class="mono">GWN7711</span> (sin PoE) por piso / área, con los
+          TV fijos por RJ45. Por el otro, la malla 5 GHz que ya está en el sitio
+          (máster + mesh) y los in-wall, para lo que no se cablea.
         </p>
         <p class="section__lead reveal">
-          Un switch core L2 <span class="mono">GWN7801P</span> (8× PoE+ · 120 W ·
-          2× SFP) cimenta la jerarquía física: alimenta los APs por PoE+ y
-          segmenta la red por VLAN.
+          Un switch core L2 <span class="mono">GWN7801</span> (8 GE · 2× SFP ·
+          sin PoE) cimiento de la jerarquía física: centraliza los enlaces de
+          planta y segmenta la red por VLAN. Los APs se alimentan con su
+          inyector PoE 110 VAC local.
         </p>
         <div class="nodes">
           <div class="nodecard reveal">
             <div class="nodecard__tag nodecard__tag--core">Core · L2</div>
-            <h3>GWN7801P</h3>
-            <p class="nodecard__sub">Switch Administrable · 8× PoE+ 120 W · 2× SFP</p>
+            <h3>GWN7801</h3>
+            <p class="nodecard__sub">Switch administrable · 8 GE · 2× SFP · sin PoE</p>
             <ul class="nodecard__list">
-              <li>Gigabit al router del ISP</li>
+              <li>Puerto 1 → router del ISP</li>
+              <li>Puertos 3–7 → GWN7711 por zona</li>
+              <li>Puerto 2 → máster (Trunk 802.1Q)</li>
               <li>VLANes 10 / 20 / 1 + Storm Control</li>
-              <li>Alimentación PoE+ a los APs</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · PB y Piso 1</h3>
+            <p class="nodecard__sub">8× GE · sin PoE · inyector 110 VAC</p>
+            <ul class="nodecard__list">
+              <li>PB: 6 TV habitaciones</li>
+              <li>P1: 6 TV habitaciones</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · Piso 2 (A y B)</h3>
+            <p class="nodecard__sub">8× GE · sin PoE · 2 unidades</p>
+            <ul class="nodecard__list">
+              <li>P2-A: 5 TV habitaciones</li>
+              <li>P2-B: 4 hab + apartamento principal (GWN7700)</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · Oficina y UP-Cocina</h3>
+            <p class="nodecard__sub">8× GE · sin PoE · cascada</p>
+            <ul class="nodecard__list">
+              <li>Oficina: 3 TV + uplink al core</li>
+              <li>UP-Cocina: 2 TV · cuelga de Oficina</li>
             </ul>
           </div>
           <div class="nodecard reveal">
             <div class="nodecard__tag nodecard__tag--master">Máster</div>
             <h3>GWN7660LR</h3>
-            <p class="nodecard__sub">Exterior Long Range · 2×2:2</p>
+            <p class="nodecard__sub">Exterior Long Range · 2×2:2 · inyector PoE</p>
             <ul class="nodecard__list">
               <li>Controlador de la malla</li>
-              <li>Trunk 802.1Q al switch (VLANes 10/20)</li>
+              <li>Trunk 802.1Q al core (VLANes 10/20)</li>
             </ul>
           </div>
           <div class="nodecard reveal">
             <div class="nodecard__tag">Nodo esclavo</div>
-            <h3>GWN7630LR · Terraza</h3>
-            <p class="nodecard__sub">Exterior Long Range · 4×4:4</p>
+            <h3>GWN7630LR · Terraza y Piso 2</h3>
+            <p class="nodecard__sub">Exterior Long Range · 4×4:4 · inyector PoE</p>
             <ul class="nodecard__list">
               <li>Mesh inalámbrico 5 GHz · 1 salto</li>
-              <li>Cobertura TV zona terraza</li>
-            </ul>
-          </div>
-          <div class="nodecard reveal">
-            <div class="nodecard__tag">Nodo esclavo</div>
-            <h3>GWN7630LR · Piso 2</h3>
-            <p class="nodecard__sub">Exterior Long Range · 4×4:4</p>
-            <ul class="nodecard__list">
-              <li>Mesh inalámbrico 5 GHz · 1 salto</li>
-              <li>Cobertura TV zona alta</li>
+              <li>Cobertura exterior y zona alta</li>
             </ul>
           </div>
           <div class="nodecard reveal">
             <div class="nodecard__tag nodecard__tag--inwall">In-Wall</div>
-            <h3>GWN7661 · Pasillo A</h3>
-            <p class="nodecard__sub">Interior de pared · 2×2:2</p>
+            <h3>GWN7661 · Zona Tour</h3>
+            <p class="nodecard__sub">Interior de pared · 2×2:2 · inyector PoE</p>
             <ul class="nodecard__list">
               <li>Mesh 5 GHz al GWN7630LR cercano</li>
               <li>3 TV cableados por RJ45</li>
@@ -380,15 +432,15 @@
           </div>
           <div class="nodecard reveal">
             <div class="nodecard__tag nodecard__tag--inwall">In-Wall</div>
-            <h3>GWN7661 · Pasillo B</h3>
-            <p class="nodecard__sub">Interior de pared · 2×2:2</p>
+            <h3>GWN7661 · Zona Piscina</h3>
+            <p class="nodecard__sub">Interior de pared · 2×2:2 · inyector PoE</p>
             <ul class="nodecard__list">
               <li>Mesh 5 GHz al GWN7630LR cercano</li>
-              <li>3 TV cableados por RJ45</li>
+              <li>2 TV cableados por RJ45 · 1 puerto libre</li>
             </ul>
           </div>
           <div class="nodecard nodecard--key reveal" aria-hidden="true">
-            <span class="nodecard__key-label">5 APs · 1 switch core + 1 máster + 2 esclavos + 2 in-wall</span>
+            <span class="nodecard__key-label">2 vías · backbone UTP + mesh 5 GHz · 2 SSID</span>
           </div>
         </div>
       </div>
@@ -429,7 +481,7 @@
               <span class="band__cell">Zona alta</span>
             </div>
             <div class="band__row reveal">
-              <span class="band__node">GWN7661 · Pasillos</span>
+              <span class="band__node">GWN7661 · Tour/Piscina</span>
               <span class="band__cell mono">—</span>
               <span class="band__cell mono">Radio OFF</span>
               <span class="band__cell">TV van por cable RJ45</span>
@@ -462,7 +514,7 @@
               <span class="band__cell">Enlace mesh + clientes</span>
             </div>
             <div class="band__row reveal">
-              <span class="band__node">GWN7661 · Pasillos</span>
+              <span class="band__node">GWN7661 · Tour/Piscina</span>
               <span class="band__cell mono">Canal 36 · auto-mesh</span>
               <span class="band__cell mono">~10–12 dBm</span>
               <span class="band__cell">Potencia mínima · salto único</span>
@@ -496,9 +548,9 @@
             <div class="stage__card">
               <button class="stage__head" aria-expanded="false">
                 <div>
-                  <h3>Switch GWN7801P y VLANes</h3>
+                  <h3>Switch core GWN7801 y switchs de acceso</h3>
                   <div class="badges">
-                    <span class="badge badge--med">Core · L2</span>
+                    <span class="badge badge--med">Core + GWN7711 · sin PoE</span>
                   </div>
                 </div>
                 <span class="stage__chev" aria-hidden="true">＋</span>
@@ -506,9 +558,12 @@
               <div class="stage__body">
                 <ul class="stage__list">
                   <li>Crear <span class="mono">VLAN 10</span> (Clientes) y <span class="mono">VLAN 20</span> (TV) · <span class="mono">VLAN 1</span> de gestión</li>
-                  <li>Puerto al router del ISP en modo <span class="mono">Access / Uplink</span></li>
-                  <li>Puerto al máster GWN7660LR en modo <span class="mono">Trunk 802.1Q</span> (VLANes 10 y 20)</li>
+                  <li>Puerto 1 del core al router del ISP en modo <span class="mono">Access / Uplink</span></li>
+                  <li>Puerto 2 del core al máster GWN7660LR en modo <span class="mono">Trunk 802.1Q</span> (VLANes 10 y 20)</li>
+                  <li>Puertos 3–7 del core a los <span class="mono">GWN7711</span> (PB, P1, P2-A, P2-B, Oficina) en <span class="mono">Trunk 802.1Q</span></li>
+                  <li>UP-Cocina: el <span class="mono">GWN7711</span> cuelga del switch de la Oficina (cascada) — sin puerto en el core</li>
                   <li><span class="mono">Storm Control</span> habilitado en la VLAN 20</li>
+                  <li>Ningún AP se alimenta del switch: cada AP con su <span class="mono">inyector PoE 110 VAC</span></li>
                   <li><span class="mono">Clientes-Manantial</span> → VLAN 10 · <span class="mono">TV-Manantial</span> + LAN de los GWN7661 → VLAN 20</li>
                 </ul>
               </div>
@@ -617,28 +672,27 @@
     <!-- ============ IN-WALL ============ -->
     <section class="section" id="inwall">
       <div class="section__inner">
-        <p class="eyebrow reveal">06 · Expansión in-wall</p>
-        <h2 class="reveal">Cuando el resultado pide cable</h2>
+        <p class="eyebrow reveal">06 · APs in-wall</p>
+        <h2 class="reveal">Las dos zonas que sí viajan por aire</h2>
         <p class="section__lead reveal">
-          Si el streaming por aire no alcanza, los GWN7661 llevan los TV directo
-          por RJ45 en 1 salto mesh sobre 5 GHz.
+          2 GWN7661 lleva los TV de la Zona Tour y la Zona Piscina directo por
+          RJ45 en 1 salto mesh sobre 5 GHz.
         </p>
         <div class="principles">
           <div class="principle reveal">
             <div class="principle__icon" aria-hidden="true">◇</div>
-            <h3>En extremos de pasillo</h3>
+            <h3>Zona Tour · 3 TV</h3>
             <p>
-              Ubicación sobre áreas alejadas de los APs Long Range, donde el TV
-              necesita conexión firme.
+              Los 3 apartamentos de la Zona Tour se conectan a los puertos LAN
+              del GWN7661; el salto mesh llega al GWN7630LR cercano.
             </p>
           </div>
           <div class="principle reveal">
             <div class="principle__icon" aria-hidden="true">◆</div>
-            <h3>PoE local, mesh en 5 GHz</h3>
+            <h3>Zona Piscina · 2 TV</h3>
             <p>
-              Se enciende con un inyector PoE y descubre al máster con enlace
-              de salto único hacia el GWN7630LR cercano, a
-              <strong>potencia mínima</strong>.
+              2 apartamentos de la Zona Piscina; queda
+              <strong>1 puerto LAN libre</strong> en el GWN7661.
             </p>
           </div>
           <div class="principle reveal">
@@ -664,11 +718,10 @@
           </div>
           <div class="principle reveal">
             <div class="principle__icon" aria-hidden="true">◉</div>
-            <h3>Arranque 2 + 2</h3>
+            <h3>5 TV, potencia mínima</h3>
             <p>
-              Se instalan <strong>2 GWN7661</strong> (6 TV cableados). Otras 2
-              unidades solo si la medición tras la Fase 1 las justifica — nunca
-              por adelantado.
+              5 TV cableados por los 2 GWN7661. Radio 2.4 GHz apagado y 5 GHz
+              de puente mesh a ~10–12 dBm: sin ensuciar el espectro.
             </p>
           </div>
         </div>
@@ -678,10 +731,10 @@
     <!-- ============ CTA FINAL ============ -->
     <section class="cta" id="plan">
       <div class="cta__inner reveal">
-        <h2>El plan completo, listo para ejecutar.</h2>
+        <h2>El plan híbrido, listo para ejecutar.</h2>
         <p>
-          Diagnóstico, inventario, plan de canales y guía paso a paso — todo en
-          el documento técnico.
+          Diagnóstico, cobertura, plan de canales y guía paso a paso del
+          backbone y la malla — todo en el documento técnico.
         </p>
         <a
           href="assets/docs/Plan-tecnico-red-wifi.pdf"
