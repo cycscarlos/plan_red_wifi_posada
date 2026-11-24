@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Híbrida TV/WiFi — Posada Casa Manantial</title>
+    <meta
+      name="description"
+      content="Red híbrida TV/WiFi para Posada Casa Manantial: backbone UTP Cat.6e, 5 switches GWN7711 para los 32 TV, 3 APs cableados y alimentados por GWN7701P con PoE+, y dos SSID segmentados."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2304080f%22/><circle cx=%2250%22 cy=%2250%22 r=%2216%22 fill=%22none%22 stroke=%22%2335c5f0%22 stroke-width=%228%22/></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <script src="assets/js/license.js"></script>
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a class="nav__brand" href="#top" aria-label="Inicio">
+          <span class="nav__pulse" aria-hidden="true"></span>
+          <span class="nav__mark"
+            >CYCS <span class="nav__mark-accent">& Co.</span></span
+          >
+        </a>
+        <nav class="nav__links" aria-label="Navegación principal">
+          <a href="#resumen">Resumen</a>
+          <a href="#premisas">Premisas</a>
+          <a href="#topologia">Topología</a>
+          <a href="#canales">Canales</a>
+          <a href="#guia">Guía</a>
+        </nav>
+        <button
+          class="nav__toggle"
+          id="navToggle"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav class="nav__mobile" id="navMobile" aria-label="Navegación móvil">
+        <a href="#resumen">Resumen</a>
+        <a href="#premisas">Premisas</a>
+        <a href="#topologia">Topología</a>
+        <a href="#canales">Canales</a>
+        <a href="#guia">Guía</a>
+      </nav>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <p class="eyebrow reveal">Plan técnico · Red híbrida TV/WiFi (backbone cableado)</p>
+        <h1 class="hero__title reveal">
+          Cable para los TV.<br />Cable para los APs.<br /><span
+            class="hero__title-accent"
+            >El aire, solo para huéspedes.</span
+          >
+        </h1>
+        <p class="hero__sub reveal">
+          Los Smart TV solo usan 2.4 GHz y compiten por tres canales. El
+          backbone UTP Cat.6e lleva los 32 TV a 5 switches GWN7711 y los 3 APs
+          al GWN7701P, que los alimenta con PoE+. Sin saltos inalámbricos, el
+          aire queda libre para los huéspedes.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#guia" class="btn btn--primary">Ver la guía de configuración</a>
+          <a
+            href="assets/docs/Red-Hibrida-TV-WiFi.pdf"
+            download
+            class="btn btn--ghost"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+            </svg>
+            Descargar plan
+          </a>
+        </div>
+
+        <div class="hero__monitor reveal" aria-hidden="true">
+          <svg viewBox="0 0 1200 160" class="ekg" preserveAspectRatio="none">
+            <path
+              id="ekgPath"
+              d="M0,80 L140,80 L165,80 L180,30 L200,130 L220,80 L260,80 L620,80 L645,80 L660,30 L680,130 L700,80 L740,80 L1100,80 L1120,80 L1135,30 L1155,130 L1175,80 L1200,80"
+              fill="none"
+              stroke="url(#ekgGrad)"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <defs>
+              <linearGradient id="ekgGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#35c5f0" stop-opacity="0" />
+                <stop offset="15%" stop-color="#35c5f0" />
+                <stop offset="50%" stop-color="#4de8c3" />
+                <stop offset="85%" stop-color="#35c5f0" />
+                <stop offset="100%" stop-color="#35c5f0" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="hero__monitor-label">
+            <span class="dot"></span> RED HÍBRIDA GWN — BACKBONE UTP + APs CABLEADOS
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-label="Datos del sitio">
+      <div class="stats__inner">
+        <div class="stat reveal">
+          <span class="stat__value" data-count="1800">0</span>
+          <span class="stat__unit">m²</span>
+          <span class="stat__label">Área del sitio</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="5">0</span>
+          <span class="stat__unit">switches</span>
+          <span class="stat__label">GWN7711 de acceso para TV</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="3">0</span>
+          <span class="stat__unit">APs</span>
+          <span class="stat__label">Cableados y con PoE+ centralizado</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__value" data-count="0">0</span>
+          <span class="stat__unit">saltos</span>
+          <span class="stat__label">De malla · el aire es de los huéspedes</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESUMEN / DIAGNÓSTICO ============ -->
+    <section class="section" id="resumen">
+      <div class="section__inner">
+        <p class="eyebrow reveal">01 · Resumen</p>
+        <h2 class="reveal">
+          No es cobertura. Es un canal compartido, saturado.
+        </h2>
+        <div class="split">
+          <div class="split__col reveal">
+            <p>
+              Los Smart TV usan tarjetas Wi-Fi genéricas restringidas a
+              <strong>2.4 GHz</strong>: solo tres canales sin solape (1, 6 y
+              11), bajo selección automática de canal. Todos compiten por el
+              mismo aire — el origen del buffering.
+            </p>
+            <p>
+              La solución es un <strong>backbone UTP Cat.6e</strong>: 5 switches
+              de acceso GWN7711 llevan los 32 TV por cable y un GWN7701P
+              alimenta los 3 APs con PoE+. El aire deja de transportar datos
+              fijos; los dos SSID segmentados ordenan lo que queda para los
+              huéspedes.
+            </p>
+          </div>
+          <div class="split__col reveal">
+            <div class="diagcard">
+              <div class="diagcard__row">
+                <span class="diagcard__k">Banda de los TV</span>
+                <span class="diagcard__v">2.4 GHz exclusivo</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Canales sin solape</span>
+                <span class="diagcard__v">3 (1 / 6 / 11)</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">SSID Clientes</span>
+                <span class="diagcard__v mono">Clientes-Manantial · 5 GHz</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">SSID TV</span>
+                <span class="diagcard__v mono">TV-Manantial · 2.4 GHz</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Vía de datos</span>
+                <span class="diagcard__v">Backbone UTP Cat.6e</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Alimentación APs</span>
+                <span class="diagcard__v mono">GWN7701P · PoE+ 60 W</span>
+              </div>
+              <div class="diagcard__row">
+                <span class="diagcard__k">Alimentación TV</span>
+                <span class="diagcard__v">110 V · datos por RJ45</span>
+              </div>
+              <div class="diagcard__row diagcard__row--accent">
+                <span class="diagcard__k">Causa raíz</span>
+                <span class="diagcard__v"
+                  >Saturación 2.4 GHz — no cobertura ni ISP</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PREMISAS DE DISEÑO ============ -->
+    <section class="section section--panel" id="premisas">
+      <div class="section__inner">
+        <p class="eyebrow reveal">02 · Premisas de diseño</p>
+        <h2 class="reveal">Reglas definitivas, sin ventanas abiertas</h2>
+        <p class="section__lead reveal">
+          Son vinculantes para la implementación: lo que no está aquí no se
+          asume, y eliminan cualquier interpretación a conveniencia.
+        </p>
+        <div class="principles">
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">01</div>
+            <h3>Todo lo fijo va por cable</h3>
+            <p>
+              Los TV por los <span class="mono">GWN7711</span> y los APs por el
+              <span class="mono">GWN7701P</span>. La malla inalámbrica deja de
+              transportar datos: el aire queda para los huéspedes.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">02</div>
+            <h3>Backbone UTP Cat.6e</h3>
+            <p>
+              5 switches de acceso <span class="mono">GWN7711</span> para los TV
+              + 1 <span class="mono">GWN7701P</span> para los APs. Todos los
+              enlaces fijos son cableados.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">03</div>
+            <h3>PoE+ centralizado</h3>
+            <p>
+              El <span class="mono">GWN7701P</span> entrega 4 puertos PoE+
+              (802.3af/at) con <strong>60 W</strong>; los 3 APs consumen
+              ≈ 39 W. Los GWN7711 no alimentan APs.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">04</div>
+            <h3>Dos SSID · bandas fijas</h3>
+            <p>
+              TV-Manantial solo en <strong>2.4 GHz</strong> · Clientes-Manantial
+              solo en <strong>5 GHz</strong>. Sin band steering ni cambio de
+              banda.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">05</div>
+            <h3>2.4 GHz · canales fijos</h3>
+            <p>
+              1 / 6 / 11, uno por AP, bajo plan manual. Ancho
+              <strong>20 MHz</strong> — el menor, el que menos se solapa. Sin
+              canal automático.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">06</div>
+            <h3>5 GHz · canal 36</h3>
+            <p>
+              Clientes en <strong>40 MHz</strong>. Sin restricción de co-canal:
+              los APs ya no se enlazan por aire. Si 36–40 está saturado por APs
+              vecinos, se desplaza a 149/153.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">07</div>
+            <h3>Sin roaming en TV</h3>
+            <p>
+              <span class="mono">802.11k/v/r</span> desactivado en
+              TV-Manantial: los TV son fijos y no deben sondear saltos de AP.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">08</div>
+            <h3>APs existentes cableados</h3>
+            <p>
+              <span class="mono">GWN7660LR</span> máster + 2×
+              <span class="mono">GWN7630LR</span> esclavos, conectados al
+              GWN7701P. Malla inalámbrica desactivada; gestión centralizada y
+              roaming se mantienen.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">09</div>
+            <h3>TV-Manantial oculta</h3>
+            <p>
+              <span class="mono">Hide SSID</span> +
+              <span class="mono">Client Isolation</span>: solo la ven los TV
+              autorizados y no se comunican entre sí.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">10</div>
+            <h3>Sin tasas legacy</h3>
+            <p>
+              OFF 1 / 2 / 5.5 / 11 Mbps (<span class="mono">CCK 802.11b</span>);
+              tasa mínima <strong>12 Mbps OFDM</strong> — un cliente lento no
+              congela el aire.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">11</div>
+            <h3>Multicast → Unicast</h3>
+            <p>
+              Habilitado: se elimina el broadcast inútil en el streaming de TV.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">12</div>
+            <h3>VLAN condicional</h3>
+            <p>
+              Hoy el GPON entrega DHCP y la red opera en
+              <span class="mono">VLAN 1</span> plana.
+              <span class="mono">VLAN 10</span> (TV) y
+              <span class="mono">VLAN 20</span> (APs) solo se activan al
+              insertar un router VLAN (<span class="mono">GWN7001</span>) antes
+              del GWN7801. No se cambia cableado.
+            </p>
+          </div>
+          <div class="principle reveal">
+            <div class="principle__icon principle__icon--num" aria-hidden="true">13</div>
+            <h3>Cinco switches por zona</h3>
+            <p>
+              PB, P1, P2-A, P2-B y Oficina. Tour/Piscina y UP-Cocina se pliegan
+              a la switch más cercana. Los TV se alimentan a
+              <strong>110 V</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TOPOLOGÍA ============ -->
+    <section class="section section--panel" id="topologia">
+      <div class="section__inner">
+        <p class="eyebrow reveal">03 · Topología</p>
+        <h2 class="reveal">Backbone UTP: TV y APs, todos por cable</h2>
+        <p class="section__lead reveal">
+          El backbone UTP Cat.6e lleva los <strong>32 TV</strong> a 5 switches
+          <span class="mono">GWN7711</span> y los <strong>3 APs</strong> al
+          <span class="mono">GWN7701P</span>, que los alimenta con PoE+.
+          Desaparecen los saltos inalámbricos entre APs.
+        </p>
+        <p class="section__lead reveal">
+          Un switch core L2 <span class="mono">GWN7801</span> (8 GE · 2× SFP)
+          centraliza los enlaces: puertos 1–5 a los GWN7711 y puerto 6 al
+          GWN7701P. Los TV se alimentan a 110 V; el cable solo lleva datos.
+        </p>
+        <div class="nodes">
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Core · L2</div>
+            <h3>GWN7801</h3>
+            <p class="nodecard__sub">Switch administrable · 8 GE · 2× SFP</p>
+            <ul class="nodecard__list">
+              <li>Puertos 1–5 → GWN7711 por zona</li>
+              <li>Puerto 6 → GWN7701P (PoE+)</li>
+              <li>Puerto 8 → GPON · 7 reserva</li>
+              <li>VLAN 1 plana · 10/20 con router VLAN</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · PB</h3>
+            <p class="nodecard__sub">8× GE · sin PoE</p>
+            <ul class="nodecard__list">
+              <li>6 TV PB + 1 TV Piscina</li>
+              <li>7 TV · puertos 2–8</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · P1</h3>
+            <p class="nodecard__sub">8× GE · sin PoE</p>
+            <ul class="nodecard__list">
+              <li>6 TV P1 + 1 TV Piscina</li>
+              <li>7 TV · puertos 2–8</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · P2-A</h3>
+            <p class="nodecard__sub">8× GE · sin PoE</p>
+            <ul class="nodecard__list">
+              <li>5 TV Piso 2 + 2 TV Tour</li>
+              <li>7 TV · puertos 2–8</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · P2-B</h3>
+            <p class="nodecard__sub">8× GE · sin PoE</p>
+            <ul class="nodecard__list">
+              <li>4 TV Piso 2 + apartamento principal + 1 TV Tour</li>
+              <li>6 TV · puertos 2–7 · 1 libre</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--core">Acceso · L2</div>
+            <h3>GWN7711 · Oficina</h3>
+            <p class="nodecard__sub">8× GE · sin PoE</p>
+            <ul class="nodecard__list">
+              <li>3 TV Oficina/Admin/Sala Social + 2 TV UP-Cocina</li>
+              <li>5 TV · puertos 2–6 · 2 libres</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag nodecard__tag--master">PoE+</div>
+            <h3>GWN7701P</h3>
+            <p class="nodecard__sub">4 puertos PoE+ · 60 W · uplink al core</p>
+            <ul class="nodecard__list">
+              <li>Alimenta los 3 APs (≈ 39 W)</li>
+              <li>Sin fuentes individuales por AP</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag">Máster</div>
+            <h3>GWN7660LR</h3>
+            <p class="nodecard__sub">Exterior Long Range · 2×2:2</p>
+            <ul class="nodecard__list">
+              <li>Cableado al GWN7701P</li>
+              <li>Controlador · malla desactivada</li>
+            </ul>
+          </div>
+          <div class="nodecard reveal">
+            <div class="nodecard__tag">Nodo esclavo</div>
+            <h3>GWN7630LR · Terraza y Piso 2</h3>
+            <p class="nodecard__sub">Exterior Long Range · 4×4:4 · 2 unidades</p>
+            <ul class="nodecard__list">
+              <li>Ambos cableados al GWN7701P</li>
+              <li>Roaming entre APs · malla desactivada</li>
+            </ul>
+          </div>
+          <div class="nodecard nodecard--key reveal" aria-hidden="true">
+            <span class="nodecard__key-label">5 GWN7711 + 1 GWN7701P · 32 TV por cable · 3 APs cableados</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CANALES ============ -->
+    <section class="section" id="canales">
+      <div class="section__inner">
+        <p class="eyebrow reveal">04 · Plan de canales</p>
+        <h2 class="reveal">Manual, fijo, y sin canales que se solapen</h2>
+        <p class="section__lead reveal">
+          Se elimina la selección automática de canal. Cada banda tiene su
+          plan, y cada AP, su canal asignado. El 2.4 GHz de TV-Manantial queda
+          como contingencia: en operación normal los 32 TV van por cable.
+        </p>
+
+        <div class="band">
+          <div class="band__head reveal">
+            <h3>2.4 GHz <span class="mono">· TV-Manantial (contingencia)</span></h3>
+            <span class="badge badge--low">20 MHz estricto</span>
+          </div>
+          <div class="band__rows">
+            <div class="band__row reveal">
+              <span class="band__node">GWN7660LR · Master</span>
+              <span class="band__cell mono">Canal 1</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona central</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Terraza</span>
+              <span class="band__cell mono">Canal 6</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona terraza</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Piso 2</span>
+              <span class="band__cell mono">Canal 11</span>
+              <span class="band__cell mono">~18 dBm</span>
+              <span class="band__cell">Zona alta</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="band">
+          <div class="band__head reveal">
+            <h3>5 GHz <span class="mono">· Clientes-Manantial</span></h3>
+            <span class="badge badge--high">40 MHz</span>
+          </div>
+          <div class="band__rows">
+            <div class="band__row reveal">
+              <span class="band__node">GWN7660LR · Master</span>
+              <span class="band__cell mono">Canal 36</span>
+              <span class="band__cell mono">~23 dBm</span>
+              <span class="band__cell">Clientes · zona central</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Terraza</span>
+              <span class="band__cell mono">Canal 36</span>
+              <span class="band__cell mono">~22 dBm</span>
+              <span class="band__cell">Clientes · terraza</span>
+            </div>
+            <div class="band__row reveal">
+              <span class="band__node">GWN7630LR · Piso 2</span>
+              <span class="band__cell mono">Canal 36</span>
+              <span class="band__cell mono">~22 dBm</span>
+              <span class="band__cell">Clientes · zona alta</span>
+            </div>
+          </div>
+        </div>
+        <p class="section__lead reveal">
+          Validación del canal 36: verificar en sitio que no haya APs vecinos
+          transmitiendo fuerte en 36–40. Si estuviera saturado, el plan se
+          desplaza a la banda alta de 5 GHz (149/153 en 40 MHz). Al ir los APs
+          cableados, no hay co-canal de malla que respetar.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ GUÍA ============ -->
+    <section class="section section--panel" id="guia">
+      <div class="section__inner">
+        <p class="eyebrow reveal">05 · Guía de configuración</p>
+        <h2 class="reveal">Cinco pasos en el panel GWN</h2>
+        <p class="section__lead reveal">
+          Accede al GWN7660LR (máster) o a GWN Cloud. Todo se resuelve en el
+          panel de configuración.
+        </p>
+
+        <div class="timeline" id="timeline">
+          <article class="stage reveal" data-stage="0">
+            <div class="stage__rail">
+              <span class="stage__num">00</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Core, switches y alimentación PoE+</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">GWN7801 + 5× GWN7711 + GWN7701P</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>Sin router VLAN: toda la red en <span class="mono">VLAN 1</span> plana (el GPON entrega DHCP 192.168.5.x)</li>
+                  <li>Con router VLAN (<span class="mono">GWN7001</span> antes del core): puertos 1–5 <span class="mono">Access VLAN 10</span> (TV) y puerto 6 <span class="mono">Access VLAN 20</span> (APs)</li>
+                  <li>Puerto 8 del core al GPON/router · puerto 7 reserva</li>
+                  <li>Puertos 1–5 del core a los <span class="mono">GWN7711</span>: PB, P1, P2-A, P2-B y Oficina</li>
+                  <li>Puerto 6 del core al <span class="mono">GWN7701P</span>; sus puertos PoE+ 2–4 alimentan los 3 APs</li>
+                  <li><span class="mono">RSTP</span> y <span class="mono">Storm Control</span> habilitados</li>
+                  <li>Los TV se alimentan a <span class="mono">110 V</span>; el cable UTP solo lleva datos</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="1">
+            <div class="stage__rail">
+              <span class="stage__num">01</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>SSIDs y segmentación</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Network Group</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>
+                    SSID 1 — <span class="mono">Clientes-Manantial</span>:
+                    5 GHz Only · banda fija (sin band steering) ·
+                    <span class="mono">802.11k/v</span> activo para móviles
+                  </li>
+                  <li>
+                    SSID 2 — <span class="mono">TV-Manantial</span>: 2.4 GHz
+                    Only · banda fija · contingencia para TV por Wi-Fi ·
+                    <span class="mono">802.11k/v/r</span> desactivado
+                  </li>
+                  <li>
+                    SSID TV: <span class="mono">Hide SSID</span> +
+                    <span class="mono">Client Isolation</span> habilitados — solo
+                    la ven los TV y no se hablan entre sí
+                  </li>
+                  <li>
+                    Con router VLAN: <span class="mono">Clientes-Manantial</span>
+                    → <span class="mono">VLAN 20</span> (APs) ·
+                    <span class="mono">TV-Manantial</span> →
+                    <span class="mono">VLAN 10</span> (TV). Sin router, todo en
+                    <span class="mono">VLAN 1</span>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="2">
+            <div class="stage__rail">
+              <span class="stage__num">02</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Radios y canales</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Access Points</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>Radio 2.4G: ancho <span class="mono">20 MHz</span> (sin solape) · canal fijo 1 / 6 / 11 · sin canal automático</li>
+                  <li>Radio 5G: ancho <span class="mono">40 MHz</span> · canal <span class="mono">36</span> único para clientes</li>
+                  <li>Tx Power: LR 2.4G <span class="mono">18 dBm</span> · 5G <span class="mono">22–23 dBm</span></li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="3">
+            <div class="stage__rail">
+              <span class="stage__num">03</span>
+              <span class="stage__line" aria-hidden="true"></span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>Tasas legacy y avanzados</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">Advanced</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li><span class="mono">Multicast to Unicast</span>: habilitado</li>
+                  <li>
+                    Desactivar 1/2/5.5/11 Mbps (<span class="mono">CCK 802.11b</span>);
+                    tasa mínima <span class="mono">12 Mbps OFDM</span>
+                  </li>
+                  <li>Minimum RSSI: <span class="mono">-80 dBm</span> (2.4G) · <span class="mono">-75 dBm</span> (5G)</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage reveal" data-stage="4">
+            <div class="stage__rail">
+              <span class="stage__num">04</span>
+            </div>
+            <div class="stage__card">
+              <button class="stage__head" aria-expanded="false">
+                <div>
+                  <h3>APs cableados y malla desactivada</h3>
+                  <div class="badges">
+                    <span class="badge badge--med">GWN7701P · GWN.Cloud</span>
+                  </div>
+                </div>
+                <span class="stage__chev" aria-hidden="true">＋</span>
+              </button>
+              <div class="stage__body">
+                <ul class="stage__list">
+                  <li>Desactivar la malla inalámbrica en el <span class="mono">GWN7660LR</span></li>
+                  <li>Verificar en <span class="mono">GWN.Cloud</span> que los 3 APs siguen Online por cable</li>
+                  <li>Confirmar gestión centralizada y roaming entre APs</li>
+                  <li>Comprobar que el GWN7701P alimenta los 3 APs (≈ 39 W de 60 W)</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA FINAL ============ -->
+    <section class="cta" id="plan">
+      <div class="cta__inner reveal">
+        <h2>La red híbrida, lista para ejecutar.</h2>
+        <p>
+          Diagnóstico, BOM, mapa de puertos, backhaul cableado y guía paso a
+          paso — todo en el documento técnico.
+        </p>
+        <a
+          href="assets/docs/Red-Hibrida-TV-WiFi.pdf"
+          download
+          class="btn btn--primary btn--lg"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16" />
+          </svg>
+          Descargar Plan Técnico
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>CYCS & Co. — Ingeniería de redes inalámbricas</span>
+        <span
+          >Copyright © Desarrollado por <i>Ing. Carlos Colmenares A.</i> | Derechos
+          Reservados · 2026</span
+        >
+      </div>
+    </footer>
+
+    <button
+      class="scrollFab"
+      id="scrollFab"
+      type="button"
+      aria-label="Ir al final de la página"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
