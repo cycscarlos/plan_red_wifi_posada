@@ -4,7 +4,25 @@
 
 - Proyecto: Plan de implementación de redes Wi-Fi Online para Posada Casa Manantial
 
-## Sesión actual: Solución híbrida (backbone + mesh 5 GHz) + costos $844.20 + reorganización docs
+## Sesión actual: Landing simple en `refactor-red-hibrida/` (24·11·2026)
+
+- El usuario autorizó una copia aislada en `refactor-red-hibrida/` y pidió **no tocar originales**.
+- Primero se hizo un refactor complejo (commit `089393a`), pero el usuario lo encontró demasiado
+  cargado: quería una **landing sencilla** basada en el PDF `Red Hibrida_TV_WiFi-24112026.pdf`
+  (equipamiento, APs al GWN7701P, esquema físico y VLANs), con el mismo formato visual.
+- Se reescribió `refactor-red-hibrida/index.html` (commit `91d7594`) con 5 secciones + CTA de
+  descarga; se agregó el componente `.flow` en `assets/css/styles.css` (diagrama HTML responsive,
+  las ramas se apilan en móvil). Se mantuvieron `main.js`, `license.js` y el candado.
+- Corrección mantenida: los TV van a **110 V**; el cable UTP solo lleva datos (el PDF dice PoE por error).
+- VLANs condicionales: hoy red plana con DHCP del GPON (192.168.5.x); con router VLAN (GWN7001)
+  se activan VLAN 10 (TV, puertos 1–5) y VLAN 20 (APs, puerto 6) sin cambiar cableado.
+- `costos.html`, el docx de guía y versiones anteriores quedan como material interno sin enlace.
+- Verificado: HTML balanceado, anclas OK, 6 tarjetas, 4 stats, 5 diagcards, 6 nodos de flujo,
+  2 enlaces al PDF, `node --check` OK, originales intactos. El usuario probó y aprobó sin cambios.
+- Pendiente: push (usuario); si se publica la carpeta, retirar el material interno (`costos.html`,
+  docx, xlsx) para no exponerlo por URL directa.
+
+## Sesión previa: Solución híbrida (backbone + mesh 5 GHz) + costos $844.20 + reorganización docs
 
 - **La solución es HÍBRIDA** (decisión del usuario, no "todo cable"): backbone UTP Cat.6e para TV
   fijos + la malla mesh 5 GHz que ya existe (GWN7660LR máster / GWN7630LR Terraza y Piso 2) +
